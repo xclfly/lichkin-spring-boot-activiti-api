@@ -43,7 +43,7 @@ public class SysActivitiConfigEntity extends LKMappedBaseSysEntity {
 
 	@Override
 	protected Object[] getCheckCodeFieldValues() {
-		return new Object[] { processKey, processType };
+		return new Object[] { processCode, processKey, processType, processName };
 	}
 
 }
