@@ -26,7 +26,7 @@ public class LKActivitiService_SingleLineProcess implements LKActivitiStatics, L
 
 
 	@Override
-	@Transactional
+	@Transactional(transactionManager = "activitiPlatformTransactionManager")
 	public LKActivitiStartProcessOut_SingleLineProcess startProcess(LKActivitiStartProcessIn_SingleLineProcess in) {
 		Map<String, Object> variables = new HashMap<>();
 		// 设置通用流程变量

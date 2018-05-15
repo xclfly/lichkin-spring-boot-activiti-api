@@ -21,6 +21,10 @@
     <!-- lichkin-entity -->
     <dependency>
       <groupId>com.lichkin.springframework.boot</groupId>
+      <artifactId>lichkin-spring-boot-entity-SysActivitiApiRequestLog</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.lichkin.springframework.boot</groupId>
       <artifactId>lichkin-spring-boot-entity-SysActivitiConfig</artifactId>
     </dependency>
     <!-- lichkin-ui -->

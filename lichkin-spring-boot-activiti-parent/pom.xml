@@ -20,6 +20,7 @@
   <modules>
     <module>../lichkin-spring-boot-activiti-defines</module>
     <module>../lichkin-spring-boot-activiti-impl-slp</module>
+    <module>../lichkin-spring-boot-entity-SysActivitiApiRequestLog</module>
     <module>../lichkin-spring-boot-entity-SysActivitiConfig</module>
     <module>../lichkin-spring-boot-activiti-api</module>
   </modules>
@@ -43,6 +44,11 @@
         <version>${com.lichkin.springframework.boot.activiti.version}</version>
       </dependency>
       <!-- lichkin-entity -->
+      <dependency>
+        <groupId>com.lichkin.springframework.boot</groupId>
+        <artifactId>lichkin-spring-boot-entity-SysActivitiApiRequestLog</artifactId>
+        <version>${com.lichkin.springframework.boot.activiti.version}</version>
+      </dependency>
       <dependency>
         <groupId>com.lichkin.springframework.boot</groupId>
         <artifactId>lichkin-spring-boot-entity-SysActivitiConfig</artifactId>
