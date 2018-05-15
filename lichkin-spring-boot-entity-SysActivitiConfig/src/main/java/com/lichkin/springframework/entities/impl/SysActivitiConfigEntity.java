@@ -23,6 +23,10 @@ public class SysActivitiConfigEntity extends LKMappedBaseSysEntity {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8888886666666901L;
 
+	/** 流程编码 */
+	@Column(nullable = false, length = 128)
+	private String processCode;
+
 	/** 流程主键 */
 	@Column(nullable = false, length = 128)
 	private String processKey;

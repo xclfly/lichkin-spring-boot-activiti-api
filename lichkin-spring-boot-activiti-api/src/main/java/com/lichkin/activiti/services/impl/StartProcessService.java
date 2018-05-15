@@ -12,6 +12,7 @@ import com.lichkin.framework.activiti.beans.in.impl.LKActivitiStartProcessIn_Sin
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiStartProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
 import com.lichkin.framework.defines.exceptions.LKRuntimeException;
 import com.lichkin.springframework.entities.impl.SysActivitiConfigEntity;
@@ -34,13 +35,15 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 		// TODO 记录请求日志
 
 		// 查询流程配置信息
-		SysActivitiConfigEntity config = configDao.findOneByProcessKey(in.getProcessKey());
+		SysActivitiConfigEntity config = configDao.findOneByUsingStatusAndCompIdAndProcessCode(LKUsingStatusEnum.USING, in.getCompId(), in.getProcessCode());
 
-		// 根据流程类型执行
-		LKActivitiProcessTypeEnum processType = config.getProcessType();
-		switch (processType) {
-			case SINGLE_LINE:
-				return startSingleLineProcess(in, config);
+		if (config != null) {
+			// 根据流程类型执行
+			LKActivitiProcessTypeEnum processType = config.getProcessType();
+			switch (processType) {
+				case SINGLE_LINE:
+					return startSingleLineProcess(in, config);
+			}
 		}
 
 		throw new LKRuntimeException(ErrorCodes.process_type_config_error);
@@ -59,7 +62,7 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	 */
 	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiConfigEntity config) {
 		// 初始化入参
-		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(in.getProcessKey(), config.getProcessName());
+		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getProcessKey(), config.getProcessName());
 
 		// TODO 根据业务表设置其它参数
 

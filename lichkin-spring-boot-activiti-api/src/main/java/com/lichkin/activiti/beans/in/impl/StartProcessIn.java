@@ -28,8 +28,8 @@ public class StartProcessIn extends LKRequestBean {
 	@NotNull
 	private String compId;
 
-	/** 流程主键 */
+	/** 流程编码 */
 	@NotNull
-	private String processKey;
+	private String processCode;
 
 }
