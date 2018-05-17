@@ -1,5 +1,7 @@
 package com.lichkin.springframework.activiti.configs;
 
+import static com.lichkin.springframework.db.LKDBActivitiStatics.PLATFORM_TRANSACTION_MANAGER;
+
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
@@ -29,12 +31,12 @@ import com.lichkin.springframework.db.configs.LKDBActivitiConfigs;
 public class LKActivitiConfigs {
 
 	@Bean
-	@DependsOn(value = { "activitiDataSource", "activitiLocalContainerEntityManagerFactoryBean", "activitiPlatformTransactionManager" })
+	@DependsOn(value = { PLATFORM_TRANSACTION_MANAGER })
 	protected SpringProcessEngineConfiguration springProcessEngineConfiguration(LKDBActivitiConfigs configs) {
 		SpringProcessEngineConfiguration conf = new SpringProcessEngineConfiguration();
 
-		conf.setDataSource(configs.getActivitiDataSource());
-		conf.setTransactionManager(configs.getActivitiPlatformTransactionManager());
+		conf.setDataSource(configs.getDataSource());
+		conf.setTransactionManager(configs.getPlatformTransactionManager());
 
 		return conf;
 	}
