@@ -24,10 +24,6 @@ public class LKMappedBaseSysActivitiApiRequestLogEntity extends LKMappedBaseSysA
 	@Column(nullable = false, length = ID_LENGTH)
 	private String userId;
 
-	/** 公司ID */
-	@Column(nullable = false, length = ID_LENGTH)
-	private String compId;
-
 	/** 流程编码 */
 	@Column(nullable = false, length = VALUE_128_LENGTH)
 	private String processCode;
@@ -35,7 +31,7 @@ public class LKMappedBaseSysActivitiApiRequestLogEntity extends LKMappedBaseSysA
 
 	@Override
 	protected Object[] getCheckCodeFieldValues() {
-		return new Object[] { super.getCheckCodeFieldValues(), userId, compId, processCode };
+		return new Object[] { super.getCheckCodeFieldValues(), userId, processCode };
 	}
 
 }
