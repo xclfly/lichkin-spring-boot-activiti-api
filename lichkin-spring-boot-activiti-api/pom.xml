@@ -44,27 +44,6 @@
       <groupId>com.lichkin.springframework.boot.activiti</groupId>
       <artifactId>lichkin-spring-boot-activiti-impl-slp</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>6.0.6</version>
-    </dependency>
-    <!-- devtools -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>
