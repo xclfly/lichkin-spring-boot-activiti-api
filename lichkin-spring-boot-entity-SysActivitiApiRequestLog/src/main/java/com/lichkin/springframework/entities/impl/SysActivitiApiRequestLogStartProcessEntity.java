@@ -1,11 +1,6 @@
 package com.lichkin.springframework.entities.impl;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.lichkin.springframework.entities.suppers.LKMappedBaseSysApiRequestLogEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,27 +12,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class SysActivitiApiRequestLogStartProcessEntity extends LKMappedBaseSysApiRequestLogEntity {
+public class SysActivitiApiRequestLogStartProcessEntity extends LKMappedBaseSysActivitiApiRequestLogEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 8888886666666991L;
-
-	/** 用户ID */
-	@Column(nullable = false, length = 32)
-	private String userId;
-
-	/** 公司ID */
-	@Column(nullable = false, length = 32)
-	private String compId;
-
-	/** 流程编码 */
-	@Column(nullable = false, length = 128)
-	private String processCode;
-
-
-	@Override
-	protected Object[] getCheckCodeFieldValues() {
-		return ArrayUtils.addAll(super.getCheckCodeFieldValues(), userId, compId, processCode);
-	}
+	private static final long serialVersionUID = 888888666666991L;
 
 }

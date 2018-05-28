@@ -7,18 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lichkin.ErrorCodes;
 import com.lichkin.activiti.beans.in.impl.StartProcessIn;
 import com.lichkin.activiti.beans.out.impl.StartProcessOut;
-import com.lichkin.activiti.daos.impl.SysActivitiApiRequestLogStartProcessDao;
-import com.lichkin.activiti.daos.impl.SysActivitiConfigDao;
 import com.lichkin.framework.activiti.beans.in.impl.LKActivitiStartProcessIn_SingleLineProcess;
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiStartProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
+import com.lichkin.framework.db.beans.QuerySQL;
+import com.lichkin.framework.db.beans.R;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
-import com.lichkin.framework.defines.enums.impl.LKClientTypeEnum;
 import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
-import com.lichkin.framework.utils.LKEnumUtils;
 import com.lichkin.springframework.entities.impl.SysActivitiApiRequestLogStartProcessEntity;
-import com.lichkin.springframework.entities.impl.SysActivitiConfigEntity;
+import com.lichkin.springframework.entities.impl.SysActivitiProcessConfigEntity;
 import com.lichkin.springframework.services.LKApiService;
 import com.lichkin.springframework.utils.LKBeanUtils;
 
@@ -29,25 +27,18 @@ import com.lichkin.springframework.utils.LKBeanUtils;
 @Service
 public class StartProcessService extends LKApiService<StartProcessIn, StartProcessOut> {
 
-	@Autowired
-	private SysActivitiApiRequestLogStartProcessDao logDao;
-
-	@Autowired
-	private SysActivitiConfigDao configDao;
-
-
 	@Override
 	@Transactional
 	public StartProcessOut handle(StartProcessIn in) throws LKException {
 		// 记录请求日志
-		LKClientTypeEnum clientType = LKEnumUtils.getEnum(LKClientTypeEnum.class, in.getClientType());
-		SysActivitiApiRequestLogStartProcessEntity log = LKBeanUtils.copyProperties(in, SysActivitiApiRequestLogStartProcessEntity.class);
-		log.setClientType(clientType);
-		log.updateCheckCode();
-		logDao.save(log);
+		dao.persistOne(LKBeanUtils.copyProperties(in, SysActivitiApiRequestLogStartProcessEntity.class));
 
 		// 查询流程配置信息
-		SysActivitiConfigEntity config = configDao.findOneByUsingStatusAndCompIdAndProcessCode(LKUsingStatusEnum.USING, in.getCompId(), in.getProcessCode());
+		QuerySQL sql = new QuerySQL(false, SysActivitiProcessConfigEntity.class);
+		sql.eq(R.SysActivitiProcessConfigEntity.usingStatus, LKUsingStatusEnum.USING);
+		sql.eq(R.SysActivitiProcessConfigEntity.compId, in.getCompId());
+		sql.eq(R.SysActivitiProcessConfigEntity.processCode, in.getProcessCode());
+		SysActivitiProcessConfigEntity config = dao.getOne(sql, SysActivitiProcessConfigEntity.class);
 
 		if (config != null) {
 			// 根据流程类型执行
@@ -76,7 +67,7 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	 * @param config 流程配置信息
 	 * @return 流程实例
 	 */
-	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiConfigEntity config) {
+	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiProcessConfigEntity config) {
 		// 初始化入参
 		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getProcessKey(), config.getProcessName());
 

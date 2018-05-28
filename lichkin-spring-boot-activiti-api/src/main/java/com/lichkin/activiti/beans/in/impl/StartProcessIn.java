@@ -1,9 +1,8 @@
 package com.lichkin.activiti.beans.in.impl;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
-import com.lichkin.framework.defines.beans.LKRequestBean;
+import com.lichkin.framework.beans.impl.LKAfterLoginRequestBean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,15 +15,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class StartProcessIn extends LKRequestBean {
+public class StartProcessIn extends LKAfterLoginRequestBean {
 
 	/** 用户ID */
-	@Pattern(regexp = "[A-Za-z0-9]{32}")
 	@NotNull
 	private String userId;
 
 	/** 公司ID */
-	@Pattern(regexp = "[A-Za-z0-9]{32}")
 	@NotNull
 	private String compId;
 

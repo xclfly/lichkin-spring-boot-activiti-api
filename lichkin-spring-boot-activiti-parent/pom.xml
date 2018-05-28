@@ -6,10 +6,11 @@
 
   <groupId>com.lichkin.springframework.boot.activiti</groupId>
   <artifactId>lichkin-spring-boot-activiti-parent</artifactId>
+  <version>1.0.0.RELEASE</version>
 
   <parent>
     <groupId>com.lichkin.springframework.boot</groupId>
-    <artifactId>lichkin-spring-boot-parent</artifactId>
+    <artifactId>lichkin-spring-boot</artifactId>
     <version>1.0.0.RELEASE</version>
   </parent>
 
@@ -36,11 +37,6 @@
       <dependency>
         <groupId>com.lichkin.springframework.boot.activiti</groupId>
         <artifactId>lichkin-spring-boot-activiti-impl-slp</artifactId>
-        <version>${com.lichkin.springframework.boot.activiti.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.lichkin.springframework.boot.activiti</groupId>
-        <artifactId>lichkin-spring-boot-activiti-api</artifactId>
         <version>${com.lichkin.springframework.boot.activiti.version}</version>
       </dependency>
       <!-- lichkin-entity -->

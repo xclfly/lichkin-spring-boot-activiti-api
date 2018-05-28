@@ -12,32 +12,32 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Activiti配置信息实体类
+ * Activiti流程配置信息实体类
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 @Getter
 @Setter
 @Entity
-public class SysActivitiConfigEntity extends LKMappedBaseSysEntity {
+public class SysActivitiProcessConfigEntity extends LKMappedBaseSysEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 8888886666666901L;
+	private static final long serialVersionUID = 888888666666901L;
 
 	/** 流程编码 */
-	@Column(nullable = false, length = 128)
+	@Column(nullable = false, length = VALUE_128_LENGTH)
 	private String processCode;
 
 	/** 流程主键 */
-	@Column(nullable = false, length = 128)
+	@Column(nullable = false, length = VALUE_128_LENGTH)
 	private String processKey;
 
 	/** 流程类型 */
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = VALUE_32_LENGTH)
 	private LKActivitiProcessTypeEnum processType;
 
 	/** 流程名称 */
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = NAME_LENGTH)
 	private String processName;
 
 

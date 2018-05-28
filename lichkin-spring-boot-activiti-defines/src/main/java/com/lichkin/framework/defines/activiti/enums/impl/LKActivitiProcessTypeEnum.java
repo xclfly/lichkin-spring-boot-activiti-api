@@ -9,6 +9,9 @@ import com.lichkin.framework.defines.enums.LKEnum;
 public enum LKActivitiProcessTypeEnum implements LKEnum {
 
 	/** 单线流程 */
-	SINGLE_LINE;
+	SINGLE_LINE,
+
+	/** 单线流程 */
+	SINGLE_BRANCH;
 
 }

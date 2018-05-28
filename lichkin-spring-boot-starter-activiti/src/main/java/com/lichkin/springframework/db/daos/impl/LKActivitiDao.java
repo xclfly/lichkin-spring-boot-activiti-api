@@ -23,7 +23,7 @@ public class LKActivitiDao extends LKBaseDao {
 
 
 	@Override
-	public EntityManager getEntityManager() {
+	protected EntityManager getEntityManager() {
 		return entityManager;
 	}
 
