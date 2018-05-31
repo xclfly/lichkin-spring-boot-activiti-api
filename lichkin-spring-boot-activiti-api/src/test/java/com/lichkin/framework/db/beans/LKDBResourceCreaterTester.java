@@ -9,7 +9,7 @@ public class LKDBResourceCreaterTester {
 	@Test
 	public void test() throws IOException {
 		// 在使用框架前需要调用本方法来创建所需的R文件以及RInitializer文件
-		LKDBResourceCreater.createRFiles();
+		LKDBResourceCreater.createRFiles("ActivitiR", false);
 	}
 
 }

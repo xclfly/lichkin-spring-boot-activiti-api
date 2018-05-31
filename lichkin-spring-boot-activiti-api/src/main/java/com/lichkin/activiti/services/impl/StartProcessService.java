@@ -11,7 +11,7 @@ import com.lichkin.framework.activiti.beans.in.impl.LKActivitiStartProcessIn_Sin
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiStartProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
 import com.lichkin.framework.db.beans.QuerySQL;
-import com.lichkin.framework.db.beans.R;
+import com.lichkin.framework.db.beans.ActivitiR;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
 import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
@@ -35,9 +35,9 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 
 		// 查询流程配置信息
 		QuerySQL sql = new QuerySQL(false, SysActivitiProcessConfigEntity.class);
-		sql.eq(R.SysActivitiProcessConfigEntity.usingStatus, LKUsingStatusEnum.USING);
-		sql.eq(R.SysActivitiProcessConfigEntity.compId, in.getCompId());
-		sql.eq(R.SysActivitiProcessConfigEntity.processCode, in.getProcessCode());
+		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.usingStatus, LKUsingStatusEnum.USING);
+		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.compId, in.getCompId());
+		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.processCode, in.getProcessCode());
 		SysActivitiProcessConfigEntity config = dao.getOne(sql, SysActivitiProcessConfigEntity.class);
 
 		if (config != null) {
