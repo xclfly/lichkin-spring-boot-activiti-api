@@ -1,5 +1,7 @@
 package com.lichkin.framework.defines.activiti.beans.in;
 
+import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,5 +22,11 @@ public class LKActivitiStartProcessIn {
 
 	/** 流程名称 */
 	protected final String processName;
+
+	/** 流程类型 */
+	protected final LKActivitiProcessTypeEnum processType;
+
+	/** 备注 */
+	protected final String comment;
 
 }

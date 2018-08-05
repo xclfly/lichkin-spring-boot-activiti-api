@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <artifactId>lichkin-spring-boot-entity-SysActivitiProcessConfig</artifactId>
+
+  <parent>
+    <groupId>com.lichkin.springframework.boot.entity</groupId>
+    <artifactId>lichkin-spring-boot-entity</artifactId>
+    <version>1.0.0.RELEASE</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <dependencies>
+    <!-- lichkin-entity -->
+    <dependency>
+      <groupId>com.lichkin.springframework.boot.entity</groupId>
+      <artifactId>lichkin-spring-boot-activiti-entity-Base</artifactId>
+      <version>1.0.0.RELEASE</version>
+    </dependency>
+  </dependencies>
+
+</project>

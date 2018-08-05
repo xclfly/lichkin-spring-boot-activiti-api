@@ -4,14 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
 
-
   <artifactId>lichkin-spring-boot-activiti-api</artifactId>
-
 
   <parent>
     <groupId>com.lichkin.springframework.boot.activiti</groupId>
     <artifactId>lichkin-spring-boot-activiti-parent</artifactId>
     <version>1.0.0.RELEASE</version>
+    <relativePath>../lichkin-spring-boot-activiti-parent</relativePath>
   </parent>
 
   <dependencies>
@@ -22,12 +21,18 @@
     </dependency>
     <!-- lichkin-entity -->
     <dependency>
-      <groupId>com.lichkin.springframework.boot</groupId>
+      <groupId>com.lichkin.springframework.boot.entity</groupId>
       <artifactId>lichkin-spring-boot-entity-SysActivitiApiRequestLog</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.lichkin.springframework.boot</groupId>
-      <artifactId>lichkin-spring-boot-entity-SysActivitiConfig</artifactId>
+      <groupId>com.lichkin.springframework.boot.entity</groupId>
+      <artifactId>lichkin-spring-boot-entity-SysActivitiProcessConfig</artifactId>
+    </dependency>
+    <!-- lichkin projects -->
+    <dependency>
+      <groupId>com.lichkin.projects</groupId>
+      <artifactId>projects-service-SysUserEmployeeLogin</artifactId>
+      <version>1.0.0.RELEASE</version>
     </dependency>
     <!-- lichkin-ui -->
     <dependency>
@@ -44,6 +49,27 @@
       <groupId>com.lichkin.springframework.boot.activiti</groupId>
       <artifactId>lichkin-spring-boot-activiti-impl-slp</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>6.0.6</version>
+    </dependency>
+    <!-- devtools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

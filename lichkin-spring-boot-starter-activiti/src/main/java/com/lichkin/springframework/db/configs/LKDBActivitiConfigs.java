@@ -22,9 +22,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-
 /**
  * 数据库配置
  * @author SuZhou LichKin Information Technology Co., Ltd.
@@ -40,8 +37,7 @@ import lombok.Getter;
 		basePackages = { DAO_PACKAGES }
 
 )
-@Getter(value = AccessLevel.PACKAGE)
-public class LKDBActivitiConfigs extends LKDBConfigs {
+public class LKDBActivitiConfigs extends LKActivitiDBConfigs {
 
 	@Bean(name = JPA_PORPERTEIS)
 	@ConfigurationProperties(prefix = JPA_PORPERTEIS_CONFIG_KEY_PREFIX)
@@ -85,5 +81,4 @@ public class LKDBActivitiConfigs extends LKDBConfigs {
 	public String getEntityPackages() {
 		return ENTITY_PACKAGES;
 	}
-
 }

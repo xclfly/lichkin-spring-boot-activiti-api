@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.lk-app-form {
+  width: 370px;
+  height: 300px;
+}
+
+.lk-app-form-btns {
+  width: 370px;
+  height: 30px;
+}
+
+.lk-app-form-btns .lk-app-btn {
+  width: 100px;
+  float: left;
+  text-align: center;
+  background-color: blue;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+}

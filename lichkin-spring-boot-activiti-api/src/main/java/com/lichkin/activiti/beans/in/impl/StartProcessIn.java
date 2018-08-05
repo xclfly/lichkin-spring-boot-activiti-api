@@ -2,7 +2,7 @@ package com.lichkin.activiti.beans.in.impl;
 
 import javax.validation.constraints.NotNull;
 
-import com.lichkin.framework.beans.impl.LKAfterLoginRequestBean;
+import com.lichkin.framework.beans.impl.LKRequestBean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,18 +15,21 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class StartProcessIn extends LKAfterLoginRequestBean {
+public class StartProcessIn extends LKRequestBean {
 
 	/** 用户ID */
 	@NotNull
 	private String userId;
 
-	/** 公司ID */
+	/** 发起人名称 */
 	@NotNull
-	private String compId;
+	private String userName;
 
-	/** 流程编码 */
+	/** 流程ID */
 	@NotNull
-	private String processCode;
+	private String processConfigId;
+
+	/** 备注 */
+	private String comment;
 
 }

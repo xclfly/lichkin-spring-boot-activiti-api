@@ -1,24 +1,31 @@
 package com.lichkin.activiti.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.lichkin.ErrorCodes;
 import com.lichkin.activiti.beans.in.impl.StartProcessIn;
 import com.lichkin.activiti.beans.out.impl.StartProcessOut;
 import com.lichkin.framework.activiti.beans.in.impl.LKActivitiStartProcessIn_SingleLineProcess;
+import com.lichkin.framework.activiti.beans.in.impl.LKActivitiStartProcessTaskIn_SingleLineProcess;
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiStartProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
+import com.lichkin.framework.db.beans.Order;
 import com.lichkin.framework.db.beans.QuerySQL;
-import com.lichkin.framework.db.beans.ActivitiR;
+import com.lichkin.framework.db.beans.SysActivitiProcessTaskConfigR;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
-import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
+import com.lichkin.framework.utils.LKBeanUtils;
 import com.lichkin.springframework.entities.impl.SysActivitiApiRequestLogStartProcessEntity;
 import com.lichkin.springframework.entities.impl.SysActivitiProcessConfigEntity;
+import com.lichkin.springframework.entities.impl.SysActivitiProcessTaskConfigEntity;
 import com.lichkin.springframework.services.LKApiService;
-import com.lichkin.springframework.utils.LKBeanUtils;
 
 /**
  * 启动流程服务类
@@ -31,15 +38,11 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	@Transactional
 	public StartProcessOut handle(StartProcessIn in) throws LKException {
 		// 记录请求日志
-		dao.persistOne(LKBeanUtils.copyProperties(in, SysActivitiApiRequestLogStartProcessEntity.class));
+		SysActivitiApiRequestLogStartProcessEntity log = LKBeanUtils.newInstance(false, in, SysActivitiApiRequestLogStartProcessEntity.class);
+		dao.mergeOne(log);
 
 		// 查询流程配置信息
-		QuerySQL sql = new QuerySQL(false, SysActivitiProcessConfigEntity.class);
-		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.usingStatus, LKUsingStatusEnum.USING);
-		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.compId, in.getCompId());
-		sql.eq(ActivitiR.SysActivitiProcessConfigEntity.processCode, in.getProcessCode());
-		SysActivitiProcessConfigEntity config = dao.getOne(sql, SysActivitiProcessConfigEntity.class);
-
+		SysActivitiProcessConfigEntity config = dao.findOneById(SysActivitiProcessConfigEntity.class, in.getProcessConfigId());
 		if (config != null) {
 			// 根据流程类型执行
 			LKActivitiProcessTypeEnum processType = config.getProcessType();
@@ -66,12 +69,36 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	 * @param in 入参
 	 * @param config 流程配置信息
 	 * @return 流程实例
+	 * @throws LKException
 	 */
-	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiProcessConfigEntity config) {
+	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiProcessConfigEntity config) throws LKException {
 		// 初始化入参
-		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getProcessKey(), config.getProcessName());
+		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getProcessKey(), config.getProcessName(), config.getProcessType(), in.getComment());
 
-		// TODO 根据业务表设置其它参数
+		// 查询流程对应的节点信息
+		QuerySQL sql = new QuerySQL(false, SysActivitiProcessTaskConfigEntity.class);
+		sql.eq(SysActivitiProcessTaskConfigR.configId, config.getId());
+		sql.addOrders(new Order(SysActivitiProcessTaskConfigR.step));
+		List<SysActivitiProcessTaskConfigEntity> taskConfigList = dao.getList(sql, SysActivitiProcessTaskConfigEntity.class);
+		// 未配置流程节点
+		if (CollectionUtils.isEmpty(taskConfigList)) {
+			throw new LKException(ErrorCodes.process_type_config_error);
+		}
+		List<LKActivitiStartProcessTaskIn_SingleLineProcess> taskList = new ArrayList<>();
+		for (int j = 0; j < taskConfigList.size(); j++) {
+			SysActivitiProcessTaskConfigEntity task = taskConfigList.get(j);
+			// 第一步为发起人 不需要配置
+			if (j == 0) {
+				task.setUserId(in.getUserId());
+				task.setUserName(in.getUserName());
+			} else {
+				if (StringUtils.isBlank(task.getUserId())) {
+					throw new LKException(ErrorCodes.process_type_config_error);
+				}
+			}
+			taskList.add(LKBeanUtils.newInstance(task, LKActivitiStartProcessTaskIn_SingleLineProcess.class));
+		}
+		i.setTaskList(taskList);
 
 		// 调用服务类方法
 		LKActivitiStartProcessOut_SingleLineProcess o = slp.startProcess(i);

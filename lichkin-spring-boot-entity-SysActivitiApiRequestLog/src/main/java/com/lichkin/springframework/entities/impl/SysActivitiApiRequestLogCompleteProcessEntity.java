@@ -2,8 +2,11 @@ package com.lichkin.springframework.entities.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-import org.apache.commons.lang3.ArrayUtils;
+import com.lichkin.framework.defines.enums.impl.LKClientTypeEnum;
+import com.lichkin.springframework.entities.suppers.BaseCompEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,19 +18,42 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class SysActivitiApiRequestLogCompleteProcessEntity extends LKMappedBaseSysActivitiApiRequestLogEntity {
+public class SysActivitiApiRequestLogCompleteProcessEntity extends BaseCompEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 888888666666992L;
+	private static final long serialVersionUID = 30007L;
+
+	/** 用户ID */
+	@Column(nullable = false, length = 64)
+	private String userId;
 
 	/** 流程类型 */
-	@Column(nullable = false, length = ID_LENGTH)
+	@Column(nullable = false, length = 64)
+	private String processType;
+
+	/** 流程类型 */
+	@Column(nullable = false, length = 20)
 	private String processInstanceId;
 
+	/** 客户端唯一标识 */
+	@Column(length = 128)
+	private String appKey;
 
-	@Override
-	protected Object[] getCheckCodeFieldValues() {
-		return ArrayUtils.addAll(super.getCheckCodeFieldValues(), processInstanceId);
-	}
+	/** 客户端类型（枚举） */
+	@Enumerated(EnumType.STRING)
+	@Column(length = 10, nullable = false)
+	private LKClientTypeEnum clientType;
+
+	/** 客户端版本号（大版本号） */
+	@Column(nullable = false)
+	private Byte versionX;
+
+	/** 客户端版本号（中版本号） */
+	@Column(nullable = false)
+	private Byte versionY;
+
+	/** 客户端版本号（小版本号） */
+	@Column(nullable = false)
+	private Short versionZ;
 
 }

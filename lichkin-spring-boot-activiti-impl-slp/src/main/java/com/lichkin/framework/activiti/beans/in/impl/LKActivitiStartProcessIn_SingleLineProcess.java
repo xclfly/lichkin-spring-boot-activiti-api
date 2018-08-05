@@ -1,6 +1,9 @@
 package com.lichkin.framework.activiti.beans.in.impl;
 
+import java.util.List;
+
 import com.lichkin.framework.defines.activiti.beans.in.LKActivitiStartProcessIn;
+import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +18,12 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class LKActivitiStartProcessIn_SingleLineProcess extends LKActivitiStartProcessIn {
 
-	public LKActivitiStartProcessIn_SingleLineProcess(String processKey, String processName) {
-		super(processKey, processName);
+	public LKActivitiStartProcessIn_SingleLineProcess(String processKey, String processName, LKActivitiProcessTypeEnum processType, String comment) {
+		super(processKey, processName, processType, comment);
 	}
+
+
+	/** 流程节点信息 */
+	private List<LKActivitiStartProcessTaskIn_SingleLineProcess> taskList;
 
 }

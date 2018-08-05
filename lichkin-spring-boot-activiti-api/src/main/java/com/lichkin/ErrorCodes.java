@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ErrorCodes implements LKCodeEnum {
 
-	no_auth(90000),
+	no_auth(900000),
 
-	process_type_config_error(90001),
+	process_type_config_error(900001),
 
-	start_process_failed(90002);
+	start_process_failed(900002);
 
 	/** 编码 */
 	private final Integer code;

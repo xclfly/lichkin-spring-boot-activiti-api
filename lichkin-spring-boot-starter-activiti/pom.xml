@@ -27,6 +27,7 @@
     <artifactId>lichkin-spring-boot</artifactId>
     <version>1.0.0.RELEASE</version>
   </parent>
+  
 
   <properties>
     <activiti-version>6.0.0</activiti-version>

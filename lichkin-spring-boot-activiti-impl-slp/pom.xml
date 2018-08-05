@@ -4,14 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
 
-
   <artifactId>lichkin-spring-boot-activiti-impl-slp</artifactId>
-
 
   <parent>
     <groupId>com.lichkin.springframework.boot.activiti</groupId>
     <artifactId>lichkin-spring-boot-activiti-parent</artifactId>
     <version>1.0.0.RELEASE</version>
+    <relativePath>../lichkin-spring-boot-activiti-parent</relativePath>
   </parent>
 
   <dependencies>
