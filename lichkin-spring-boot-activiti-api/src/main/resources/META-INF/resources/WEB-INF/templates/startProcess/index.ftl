@@ -13,8 +13,6 @@
   </div>
   </#if>
   <#if section="javascript-links">
-  	<#-- 引入对应的脚本文件 -->
-  	<@lichkin@jsTag/>
     <script type="text/javascript">
 	var _processId = '${processId!}';
 	var _userId = '${userId!}';

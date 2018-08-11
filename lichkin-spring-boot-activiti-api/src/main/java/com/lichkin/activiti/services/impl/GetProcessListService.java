@@ -61,7 +61,7 @@ public class GetProcessListService extends LKApiService<GetProcessListIn, List<G
 			sql.eq(SysActivitiProcessConfigR.deptId, "");
 			sql.notIn(SysActivitiProcessConfigR.processCode, processCodeBuf.toString());
 			sql.eq(SysActivitiProcessConfigR.usingStatus, LKUsingStatusEnum.USING);
-			sql.eq(SysActivitiProcessConfigR.canUse, LKYesNoEnum.YES);
+			sql.eq(SysActivitiProcessConfigR.available, LKYesNoEnum.YES);
 			List<SysActivitiProcessConfigEntity> compProList = dao.getList(sql, SysActivitiProcessConfigEntity.class);
 			for (int i = 0; i < compProList.size(); i++) {
 				GetProcessListOut out = new GetProcessListOut();

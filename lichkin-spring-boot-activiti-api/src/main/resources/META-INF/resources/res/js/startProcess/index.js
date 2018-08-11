@@ -1,8 +1,8 @@
 $(function() {
-  $('<div class="lk-app-form">' + LK.i18n.taskComment + '：<textarea style="width:300px;height:50px;" id="comment"></textarea></div>').appendTo($('#lk_app_content'));
+  $('<div class="lk-app-form">' + $.LKGetI18N('Comments') + '：<textarea style="width:300px;height:50px;" id="comment"></textarea></div>').appendTo($('#lk_app_content'));
   var $btns = $('<div class="lk-app-form-btns"></div>').appendTo($('#lk_app_content'));
-  var $submitBtn = $('<div class="lk-app-btn" id="submit_btn">' + LK.i18n.confirm + '</div>').appendTo($btns);
-  var $cancelBtn = $('<div class="lk-app-btn" id="cancel_btn">' + LK.i18n.cancel + '</div>').appendTo($btns);
+  var $submitBtn = $('<div class="lk-app-btn" id="submit_btn">' + $.LKGetI18N('ok') + '</div>').appendTo($btns);
+  var $cancelBtn = $('<div class="lk-app-btn" id="cancel_btn">' + $.LKGetI18N('cancel') + '</div>').appendTo($btns);
   $submitBtn.click(function() {
     LK.ajax({
       url : '/UserEmployee/Activiti/StartProcess',
@@ -14,7 +14,7 @@ $(function() {
       },
       success : function(responseDatas) {
         if (responseDatas) {
-          LK.alert(LK.i18n.successPromptMsg);
+          LK.alert('Submit successfully');
           window.history.back();
         }
       }

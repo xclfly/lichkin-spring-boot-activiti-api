@@ -20,8 +20,8 @@ $(function() {
             var $li = $('<li></li>').appendTo($('#lk_activiti_ul'));
 
             $('<div class="lk-processName">' + ary.processName + '</div>').appendTo($li);
-            $('<div class="lk-processStartUserName"><lable>' + LK.i18n.processStartUserName + '：</lable>' + ary.processStartUserName + '</div>').appendTo($li);
-            $('<div class="lk-taskStartTime"><lable>' + LK.i18n.taskStartTime + '：</lable>' + ary.taskStartTime + '</div>').appendTo($li);
+            $('<div class="lk-processStartUserName"><lable>' + $.LKGetI18N('Process originator') + '：</lable>' + ary.processStartUserName + '</div>').appendTo($li);
+            $('<div class="lk-taskStartTime"><lable>' + $.LKGetI18N('Initiation time') + '：</lable>' + ary.taskStartTime + '</div>').appendTo($li);
 
             (function(processInstanceId) {
               $li.click(function() {
@@ -48,14 +48,14 @@ $(function() {
             var $li = $('<li></li>').appendTo($('#lk_activiti_ul'));
 
             $('<div class="lk-processName">' + ary.processName + '</div>').appendTo($li);
-            $('<div class="lk-processStartUserName"><lable>' + LK.i18n.processStartUserName + '：</lable>' + ary.processStartUserName + '</div>').appendTo($li);
-            $('<div class="lk-taskStartTime"><lable>' + LK.i18n.taskStartTime + '：</lable>' + ary.processStartTime + '</div>').appendTo($li);
-            $('<div class="lk-taskEndTime"><lable>' + LK.i18n.taskEndTime + '：</lable>' + ary.taskEndTime + '</div>').appendTo($li);
+            $('<div class="lk-processStartUserName"><lable>' + $.LKGetI18N('Process originator') + '：</lable>' + ary.processStartUserName + '</div>').appendTo($li);
+            $('<div class="lk-taskStartTime"><lable>' + $.LKGetI18N('Initiation time') + '：</lable>' + ary.processStartTime + '</div>').appendTo($li);
+            $('<div class="lk-taskEndTime"><lable>' + $.LKGetI18N('Approval time') + '：</lable>' + ary.taskEndTime + '</div>').appendTo($li);
             if (ary.processIsEnd) {
-              $('<div class="lk-processStatus"><lable>' + LK.i18n.processStatus + '：</lable>' + LK.i18n.PassTheAudit + '</div>').appendTo($li);
-              $('<div class="lk-processEndTime"><lable>' + LK.i18n.processEndTime + '：</lable>' + ary.processEndTime + '</div>').appendTo($li);
+              $('<div class="lk-processStatus"><lable>' + $.LKGetI18N('Process status') + '：</lable>' + $.LKGetI18N('Pass the audit') + '</div>').appendTo($li);
+              $('<div class="lk-processEndTime"><lable>' + $.LKGetI18N('Finish time') + '：</lable>' + ary.processEndTime + '</div>').appendTo($li);
             } else {
-              $('<div class="lk-processStatus"><lable>' + LK.i18n.processStatus + '：</lable>' + ary.activeTaskName + '</div>').appendTo($li);
+              $('<div class="lk-processStatus"><lable>' + $.LKGetI18N('Process status') + '：</lable>' + ary.activeTaskName + '</div>').appendTo($li);
             }
 
             (function(processInstanceId) {
