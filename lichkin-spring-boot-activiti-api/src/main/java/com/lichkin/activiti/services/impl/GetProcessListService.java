@@ -14,6 +14,7 @@ import com.lichkin.framework.db.beans.QuerySQL;
 import com.lichkin.framework.db.beans.SysActivitiProcessConfigR;
 import com.lichkin.framework.defines.LKFrameworkStatics;
 import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
+import com.lichkin.framework.defines.enums.impl.LKYesNoEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
 import com.lichkin.springframework.entities.impl.SysActivitiProcessConfigEntity;
 import com.lichkin.springframework.services.LKApiService;
@@ -35,6 +36,7 @@ public class GetProcessListService extends LKApiService<GetProcessListIn, List<G
 		sql.eq(SysActivitiProcessConfigR.compId, in.getCompId());
 		sql.eq(SysActivitiProcessConfigR.deptId, in.getDeptId());
 		sql.eq(SysActivitiProcessConfigR.usingStatus, LKUsingStatusEnum.USING);
+		sql.eq(SysActivitiProcessConfigR.available, LKYesNoEnum.YES);
 		List<SysActivitiProcessConfigEntity> deptProList = dao.getList(sql, SysActivitiProcessConfigEntity.class);
 		StringBuffer processCodeBuf = new StringBuffer();
 		if (CollectionUtils.isNotEmpty(deptProList)) {
@@ -59,6 +61,7 @@ public class GetProcessListService extends LKApiService<GetProcessListIn, List<G
 			sql.eq(SysActivitiProcessConfigR.deptId, "");
 			sql.notIn(SysActivitiProcessConfigR.processCode, processCodeBuf.toString());
 			sql.eq(SysActivitiProcessConfigR.usingStatus, LKUsingStatusEnum.USING);
+			sql.eq(SysActivitiProcessConfigR.canUse, LKYesNoEnum.YES);
 			List<SysActivitiProcessConfigEntity> compProList = dao.getList(sql, SysActivitiProcessConfigEntity.class);
 			for (int i = 0; i < compProList.size(); i++) {
 				GetProcessListOut out = new GetProcessListOut();

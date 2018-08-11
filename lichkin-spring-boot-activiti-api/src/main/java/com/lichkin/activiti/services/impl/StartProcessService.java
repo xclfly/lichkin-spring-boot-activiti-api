@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import com.lichkin.ErrorCodes;
 import com.lichkin.activiti.beans.in.impl.StartProcessIn;
@@ -80,10 +79,6 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 		sql.eq(SysActivitiProcessTaskConfigR.configId, config.getId());
 		sql.addOrders(new Order(SysActivitiProcessTaskConfigR.step));
 		List<SysActivitiProcessTaskConfigEntity> taskConfigList = dao.getList(sql, SysActivitiProcessTaskConfigEntity.class);
-		// 未配置流程节点
-		if (CollectionUtils.isEmpty(taskConfigList)) {
-			throw new LKException(ErrorCodes.process_type_config_error);
-		}
 		List<LKActivitiStartProcessTaskIn_SingleLineProcess> taskList = new ArrayList<>();
 		for (int j = 0; j < taskConfigList.size(); j++) {
 			SysActivitiProcessTaskConfigEntity task = taskConfigList.get(j);
@@ -92,6 +87,7 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 				task.setUserId(in.getUserId());
 				task.setUserName(in.getUserName());
 			} else {
+				// 未配置流程节点
 				if (StringUtils.isBlank(task.getUserId())) {
 					throw new LKException(ErrorCodes.process_type_config_error);
 				}
@@ -105,8 +101,6 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 
 		// 初始化出参
 		StartProcessOut out = new StartProcessOut(o.getProcessInstanceId(), config.getProcessType());
-
-		// TODO 设置其它参数
 
 		// 返回结果
 		return out;
