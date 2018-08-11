@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+import com.lichkin.framework.defines.enums.impl.LKYesNoEnum;
 import com.lichkin.springframework.entities.suppers.BaseCompEntity;
 
 import lombok.Getter;
@@ -43,5 +44,10 @@ public class SysActivitiProcessConfigEntity extends BaseCompEntity {
 	/** 部门ID */
 	@Column(nullable = false, length = 128)
 	private String deptId;
+
+	/** 是否可用（枚举） */
+	@Enumerated(EnumType.STRING)
+	@Column(length = 3, nullable = false)
+	private LKYesNoEnum available;
 
 }
