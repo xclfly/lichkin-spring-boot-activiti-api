@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 办理流程出参
+ * 驳回流程出参
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 @Getter
@@ -14,8 +14,5 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class RejectProcessOut {
-
-	/** 流程是否结束 */
-	private final boolean processIsEnd;
 
 }

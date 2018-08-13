@@ -19,7 +19,7 @@ import com.lichkin.springframework.services.LKApiService;
  */
 @LKApiType(apiType = ApiType.ROOT_QUERY)
 @RestController
-@RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_APP_USEREMPLOYEE + "/Activiti/RejectProcess")
+@RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_WEB_USEREMPLOYEE + "/Activiti/RejectProcess")
 public class RejectProcessController extends LKApiController<RejectProcessIn, RejectProcessOut> {
 
 	@Autowired

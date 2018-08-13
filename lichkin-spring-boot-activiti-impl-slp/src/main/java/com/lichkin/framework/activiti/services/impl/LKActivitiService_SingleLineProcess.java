@@ -6,12 +6,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.FlowNode;
-import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.ManagementService;
@@ -26,7 +23,6 @@ import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -264,6 +260,9 @@ public class LKActivitiService_SingleLineProcess implements
 							}
 						}
 					}
+					if (StringUtils.isBlank(taskAll.getTaskComment())) {
+						taskAll.setTaskComment(taskInstance.getDeleteReason());
+					}
 					break;
 				}
 			}
@@ -272,59 +271,15 @@ public class LKActivitiService_SingleLineProcess implements
 	}
 
 
+	/**
+	 * 驳回流程
+	 * @param in 入参
+	 * @return 流程实例
+	 */
 	@Override
 	public LKActivitiRejectProcessOut_SingleLineProcess RejectProcess(LKActivitiRejectProcessIn_SingleLineProcess in) {
-		processReject(in.getProcessInstanceId(), in.getUserId());
-		return null;
-	}
-
-
-	public void processReject(String processInstanceId, String userId) {
-		// 查询当前要办理的task
-		Task myTask = getCurrentTask(processInstanceId, userId);
-		if (myTask == null) {
-			throw new ServiceException("流程未启动或已执行完成，无法撤回");
-		}
-
-		String processDefinitionId = myTask.getProcessDefinitionId();
-		BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-
-		String currentActivityId = myTask.getTaskDefinitionKey();
-
-		FlowNode currentFlowNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(currentActivityId);
-
-		// 获取目标节点
-		FlowNode targetFlowNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement("step1");
-
-		// 记录原活动方向
-		List<SequenceFlow> oriSequenceFlows = new ArrayList<>();
-		oriSequenceFlows.addAll(currentFlowNode.getOutgoingFlows());
-
-		// 清理活动方向
-		currentFlowNode.getOutgoingFlows().clear();
-
-		// 建立新方向
-		List<SequenceFlow> newSequenceFlowList = new ArrayList<>();
-		SequenceFlow newSequenceFlow = new SequenceFlow();
-
-		String uuid = UUID.randomUUID().toString().replace("-", "");
-		newSequenceFlow.setId(uuid);
-		newSequenceFlow.setSourceFlowElement(currentFlowNode);
-		newSequenceFlow.setTargetFlowElement(targetFlowNode);
-		newSequenceFlowList.add(newSequenceFlow);
-		currentFlowNode.setOutgoingFlows(newSequenceFlowList);
-
-		// Authentication.setAuthenticatedUserId(userId);
-		taskService.addComment(myTask.getId(), myTask.getProcessInstanceId(), "驳回");
-
-		Map<String, Object> currentVariables = myTask.getProcessVariables();
-		// 完成任务
-		taskService.complete(myTask.getId(), currentVariables);
-		// 恢复原方向
-		currentFlowNode.setOutgoingFlows(oriSequenceFlows);
-
-		// runtimeService.deleteProcessInstance(processInstanceId, "驳回删除流程");
-
+		runtimeService.deleteProcessInstance(in.getProcessInstanceId(), in.getComment());
+		return new LKActivitiRejectProcessOut_SingleLineProcess();
 	}
 
 }

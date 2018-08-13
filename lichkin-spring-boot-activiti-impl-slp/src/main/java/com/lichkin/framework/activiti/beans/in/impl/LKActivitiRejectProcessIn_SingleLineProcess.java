@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 办理流程入参 -> 单线流程
+ * 驳回流程入参 -> 单线流程
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 @Getter

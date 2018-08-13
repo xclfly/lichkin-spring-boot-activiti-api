@@ -58,4 +58,7 @@ public class GetDoneProcessOut {
 	/** 当前流程活跃节点名称 */
 	private String activeTaskName;
 
+	/** 删除流程原因 */
+	private String delReason;
+
 }

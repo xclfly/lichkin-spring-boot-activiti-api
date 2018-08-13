@@ -4,5 +4,6 @@ $.LKExtendI18N({
   'Approval time' : '审批时间',
   'Process status' : '审批状态',
   'Finish time' : '完成时间',
-  'Pass the audit' : '审核通过'
+  'Pass the audit' : '审核通过',
+  'Reject' : '驳回'
 });

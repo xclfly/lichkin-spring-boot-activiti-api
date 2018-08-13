@@ -27,16 +27,21 @@ public class ActivitiCenterPageController extends LKPagesController {
 		String token = request.getParameter("token");
 
 		if (LKSession.getLogin(session) == null) {
-			EmployeeLoginInfo loginInfo = service.findUserLoginByToken(token, compId);
-			LKSession.setLogin(session, loginInfo.getEmployeeLogin());
-			LKSession.setComp(session, loginInfo.getComp());
-			LKSession.setUser(session, loginInfo.getEmployee());
-			LKSession.setString(session, "deptId", loginInfo.getDept().getId());
+			try {
+				EmployeeLoginInfo loginInfo = service.findUserLoginByToken(token, compId);
+				LKSession.setLogin(session, loginInfo.getEmployeeLogin());
+				LKSession.setComp(session, loginInfo.getComp());
+				LKSession.setUser(session, loginInfo.getEmployee());
+				LKSession.setString(session, "deptId", loginInfo.getDept().getId());
+			} catch (Exception e) {
+			}
 		}
 
 		LKPage lkPage = new LKPage();
-		lkPage.putAttribute("deptId", LKSession.getString(session, "deptId", ""));
-		lkPage.putAttribute("userId", LKSession.getLoginId(session));
+		if (LKSession.getLogin(session) != null) {
+			lkPage.putAttribute("deptId", LKSession.getString(session, "deptId", ""));
+			lkPage.putAttribute("userId", LKSession.getLoginId(session));
+		}
 
 		return lkPage;
 	}

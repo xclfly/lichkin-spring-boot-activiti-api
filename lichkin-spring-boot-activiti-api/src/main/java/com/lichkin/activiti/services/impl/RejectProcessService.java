@@ -58,9 +58,7 @@ public class RejectProcessService extends LKApiService<RejectProcessIn, RejectPr
 		LKActivitiRejectProcessOut_SingleLineProcess o = slp.RejectProcess(i);
 
 		// 初始化出参
-		RejectProcessOut out = new RejectProcessOut(o.isProcessIsEnd());
-
-		// TODO 设置其它参数
+		RejectProcessOut out = new RejectProcessOut();
 
 		// 返回结果
 		return out;

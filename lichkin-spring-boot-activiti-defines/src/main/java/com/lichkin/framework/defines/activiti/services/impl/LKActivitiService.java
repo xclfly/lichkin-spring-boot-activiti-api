@@ -146,6 +146,7 @@ public class LKActivitiService implements
 				// 设置流程开始时间
 				for (HistoricProcessInstance proc : procList) {
 					if (taskInfo.getProcessInstanceId().equals(proc.getId())) {
+						taskInfo.setDelReason(proc.getDeleteReason());
 						taskInfo.setProcessStartTime(proc.getStartTime());
 						if (proc.getEndTime() != null) {
 							taskInfo.setProcessIsEnd(true);
