@@ -43,12 +43,12 @@ public class GetPendingProcessService extends LKApiService<GetPendingProcessIn, 
 		// 初始化入参
 		LKActivitiGetPendingProcessIn i = new LKActivitiGetPendingProcessIn(in.getUserId());
 		if (in.getPageNumber() == null) {
-			in.setPageNumber(1);
+			in.setPageNumber(0);
 		}
 		if (in.getPageSize() == null) {
 			in.setPageSize(10);
 		}
-		i.setFirstResult((in.getPageNumber() - 1) * in.getPageSize());
+		i.setFirstResult(in.getPageNumber() * in.getPageSize());
 		i.setMaxResults(in.getPageSize());
 
 		// 调用服务类方法

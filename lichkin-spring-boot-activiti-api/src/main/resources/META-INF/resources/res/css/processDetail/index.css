@@ -40,8 +40,6 @@ body {
   background-color: #89969E;
 }
 
-
-
 .top_title {
   width: 90%;
   max-width: 1170px;
@@ -157,6 +155,10 @@ Main components
   top: 50%;
   margin-left: -12px;
   margin-top: -12px;
+}
+
+.cd-timeline-img.cd-reject {
+  background: #F0AD4E;
 }
 
 .cd-timeline-img.cd-done {

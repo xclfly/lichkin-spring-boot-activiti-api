@@ -17,7 +17,9 @@ public enum ErrorCodes implements LKCodeEnum {
 
 	process_type_config_error(900001),
 
-	start_process_failed(900002);
+	start_process_failed(900002),
+
+	complete_process_failed(900002);
 
 	/** 编码 */
 	private final Integer code;

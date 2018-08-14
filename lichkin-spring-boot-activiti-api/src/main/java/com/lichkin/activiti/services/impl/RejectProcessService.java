@@ -34,7 +34,7 @@ public class RejectProcessService extends LKApiService<RejectProcessIn, RejectPr
 						return RejectProcessTask(in);
 				}
 			} catch (Exception e) {
-				throw new LKException(ErrorCodes.start_process_failed);
+				throw new LKException(ErrorCodes.complete_process_failed);
 			}
 		}
 

@@ -40,7 +40,7 @@ public class CompleteProcessService extends LKApiService<CompleteProcessIn, Comp
 						return completeProcessTask(in);
 				}
 			} catch (Exception e) {
-				throw new LKException(ErrorCodes.start_process_failed);
+				throw new LKException(ErrorCodes.complete_process_failed);
 			}
 		}
 

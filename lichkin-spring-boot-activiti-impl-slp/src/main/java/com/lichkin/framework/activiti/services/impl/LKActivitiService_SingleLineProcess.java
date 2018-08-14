@@ -250,6 +250,8 @@ public class LKActivitiService_SingleLineProcess implements
 				if (taskAll.getTaskId().equals(taskInstance.getTaskDefinitionKey())) {
 					taskAll.setTaskName(taskInstance.getName());
 					taskAll.setTaskStartTime(taskInstance.getStartTime());
+					taskAll.setDeleteReason(taskInstance.getDeleteReason());
+
 					// 获取流程节点结束时间(未审批时此值为空)
 					taskAll.setTaskEndTime(taskInstance.getEndTime());
 					if (CollectionUtils.isNotEmpty(commentList)) {
@@ -259,9 +261,6 @@ public class LKActivitiService_SingleLineProcess implements
 								break;
 							}
 						}
-					}
-					if (StringUtils.isBlank(taskAll.getTaskComment())) {
-						taskAll.setTaskComment(taskInstance.getDeleteReason());
 					}
 					break;
 				}

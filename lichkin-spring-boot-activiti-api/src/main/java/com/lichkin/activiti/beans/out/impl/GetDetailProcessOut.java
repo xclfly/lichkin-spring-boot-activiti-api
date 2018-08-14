@@ -55,4 +55,7 @@ public class GetDetailProcessOut {
 	@DateToString(value = LKDateTimeTypeEnum.STANDARD)
 	private String processEndTime;
 
+	/** 流程删除原因 */
+	private String deleteReason;
+
 }

@@ -53,4 +53,7 @@ public class LKActivitiGetDetailProcessOut_SingleLineProcess extends LKActivitiG
 	/** 节点结束时间 */
 	private Date taskEndTime;
 
+	/** 流程删除原因 */
+	private String deleteReason;
+
 }

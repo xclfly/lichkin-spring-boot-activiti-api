@@ -38,7 +38,7 @@ public class GetDetailProcessService extends LKApiService<GetDetailProcessIn, Li
 						return getDetailProcess(in);
 				}
 			} catch (Exception e) {
-				throw new LKException(ErrorCodes.start_process_failed);
+				throw new LKException(ErrorCodes.process_type_config_error);
 			}
 		}
 
