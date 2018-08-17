@@ -58,4 +58,10 @@ public class GetDetailProcessOut {
 	/** 流程删除原因 */
 	private String deleteReason;
 
+	/** 流程配置ID */
+	private String processConfigId;
+
+	/** 节点Id */
+	private String taskId;
+
 }

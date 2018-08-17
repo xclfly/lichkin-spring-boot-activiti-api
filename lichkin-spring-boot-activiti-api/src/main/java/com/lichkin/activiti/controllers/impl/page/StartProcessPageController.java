@@ -20,7 +20,7 @@ public class StartProcessPageController extends LKPagesController {
 		String processId = request.getParameter("processId");
 		LKPage lkPage = new LKPage();
 		lkPage.putAttribute("processId", processId);
-		lkPage.putAttribute("userId", LKSession.getLoginId(session));
+		lkPage.putAttribute("userId", LKSession.getString(session, "activitiUserId", ""));
 		lkPage.putAttribute("userName", LKSession.getUser(session).getUserName());
 		return lkPage;
 	}

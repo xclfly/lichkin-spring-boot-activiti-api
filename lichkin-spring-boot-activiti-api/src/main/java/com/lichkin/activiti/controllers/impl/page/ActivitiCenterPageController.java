@@ -33,6 +33,7 @@ public class ActivitiCenterPageController extends LKPagesController {
 				LKSession.setComp(session, loginInfo.getComp());
 				LKSession.setUser(session, loginInfo.getEmployee());
 				LKSession.setString(session, "deptId", loginInfo.getDept().getId());
+				LKSession.setString(session, "activitiUserId", loginInfo.getEmployeeLogin().getId() + "_" + compId);
 			} catch (Exception e) {
 			}
 		}
@@ -40,7 +41,7 @@ public class ActivitiCenterPageController extends LKPagesController {
 		LKPage lkPage = new LKPage();
 		if (LKSession.getLogin(session) != null) {
 			lkPage.putAttribute("deptId", LKSession.getString(session, "deptId", ""));
-			lkPage.putAttribute("userId", LKSession.getLoginId(session));
+			lkPage.putAttribute("userId", LKSession.getString(session, "activitiUserId", ""));
 		}
 
 		return lkPage;

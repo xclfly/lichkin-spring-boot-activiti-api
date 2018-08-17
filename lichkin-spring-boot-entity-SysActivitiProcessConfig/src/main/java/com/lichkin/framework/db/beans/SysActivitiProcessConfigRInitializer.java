@@ -17,10 +17,11 @@ class SysActivitiProcessConfigRInitializer implements LKRInitializer {
 		LKDBResource.addColumn("30004003", "SysActivitiProcessConfigEntity", "processName");
 		LKDBResource.addColumn("30004004", "SysActivitiProcessConfigEntity", "deptId");
 		LKDBResource.addColumn("30004005", "SysActivitiProcessConfigEntity", "available");
-		LKDBResource.addColumn("30004006", "SysActivitiProcessConfigEntity", "compId");
-		LKDBResource.addColumn("30004007", "SysActivitiProcessConfigEntity", "usingStatus");
-		LKDBResource.addColumn("30004008", "SysActivitiProcessConfigEntity", "insertTime");
-		LKDBResource.addColumn("30004009", "SysActivitiProcessConfigEntity", "id");
+		LKDBResource.addColumn("30004006", "SysActivitiProcessConfigEntity", "stepCount");
+		LKDBResource.addColumn("30004007", "SysActivitiProcessConfigEntity", "compId");
+		LKDBResource.addColumn("30004008", "SysActivitiProcessConfigEntity", "usingStatus");
+		LKDBResource.addColumn("30004009", "SysActivitiProcessConfigEntity", "insertTime");
+		LKDBResource.addColumn("30004010", "SysActivitiProcessConfigEntity", "id");
 	}
 
 }

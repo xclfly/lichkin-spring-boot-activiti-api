@@ -21,7 +21,7 @@ public class ProcessDetailPageController extends LKPagesController {
 		String processState = request.getParameter("processState");
 
 		LKPage lkPage = new LKPage();
-		lkPage.putAttribute("userId", LKSession.getLoginId(session));
+		lkPage.putAttribute("userId", LKSession.getString(session, "activitiUserId", ""));
 		lkPage.putAttribute("processType", processType);
 		lkPage.putAttribute("processInstanceId", processInstanceId);
 		lkPage.putAttribute("processState", processState);

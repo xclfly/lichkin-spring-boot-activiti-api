@@ -2,6 +2,7 @@ package com.lichkin.springframework.entities.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 import com.lichkin.springframework.entities.suppers.IDEntity;
 
@@ -39,5 +40,10 @@ public class SysActivitiProcessTaskConfigEntity extends IDEntity {
 	/** 节点步骤 */
 	@Column(nullable = false)
 	private Byte step;
+
+	/** 表单字段json */
+	@Lob
+	@Column(nullable = false)
+	private String formJson;
 
 }

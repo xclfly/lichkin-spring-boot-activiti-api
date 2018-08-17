@@ -16,6 +16,8 @@ public interface SysActivitiProcessTaskConfigR {
 
 	public static final int step = 0x30005004;
 
-	public static final int id = 0x30005005;
+	public static final int formJson = 0x30005005;
+
+	public static final int id = 0x30005006;
 
 }

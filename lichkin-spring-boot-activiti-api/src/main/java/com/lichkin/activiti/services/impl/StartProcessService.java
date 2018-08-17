@@ -3,7 +3,6 @@ package com.lichkin.activiti.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,7 +71,7 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	 */
 	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiProcessConfigEntity config) throws LKException {
 		// 初始化入参
-		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getProcessKey(), config.getProcessName(), config.getProcessType(), in.getComment());
+		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getId(), config.getProcessKey(), config.getProcessName(), config.getProcessType(), in.getComment());
 
 		// 查询流程对应的节点信息
 		QuerySQL sql = new QuerySQL(false, SysActivitiProcessTaskConfigEntity.class);
@@ -81,18 +80,16 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 		List<SysActivitiProcessTaskConfigEntity> taskConfigList = dao.getList(sql, SysActivitiProcessTaskConfigEntity.class);
 		List<LKActivitiStartProcessTaskIn_SingleLineProcess> taskList = new ArrayList<>();
 		for (int j = 0; j < taskConfigList.size(); j++) {
-			SysActivitiProcessTaskConfigEntity task = taskConfigList.get(j);
-			// 第一步为发起人 不需要配置
+			LKActivitiStartProcessTaskIn_SingleLineProcess taskIn = LKBeanUtils.newInstance(taskConfigList.get(j), LKActivitiStartProcessTaskIn_SingleLineProcess.class);
+			// 第一步为发起人,特别处理
 			if (j == 0) {
-				task.setUserId(in.getUserId());
-				task.setUserName(in.getUserName());
+				taskIn.setUserId(in.getUserId());
+				taskIn.setUserName(in.getUserName());
 			} else {
-				// 未配置流程节点
-				if (StringUtils.isBlank(task.getUserId())) {
-					throw new LKException(ErrorCodes.process_type_config_error);
-				}
+				// 员工登录ID&公司ID（同一个员工在多个公司只有一个登录ID）
+				taskIn.setUserId(taskIn.getUserId() + "_" + config.getCompId());
 			}
-			taskList.add(LKBeanUtils.newInstance(task, LKActivitiStartProcessTaskIn_SingleLineProcess.class));
+			taskList.add(taskIn);
 		}
 		i.setTaskList(taskList);
 

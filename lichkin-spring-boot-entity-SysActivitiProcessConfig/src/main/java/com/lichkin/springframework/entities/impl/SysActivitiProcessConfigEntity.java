@@ -47,7 +47,11 @@ public class SysActivitiProcessConfigEntity extends BaseCompEntity {
 
 	/** 是否可用（枚举） */
 	@Enumerated(EnumType.STRING)
-	@Column(length = 3, nullable = false)
+	@Column(nullable = false, length = 3)
 	private LKYesNoEnum available;
+
+	/** 流程步骤数 */
+	@Column(nullable = false)
+	private Byte stepCount;
 
 }

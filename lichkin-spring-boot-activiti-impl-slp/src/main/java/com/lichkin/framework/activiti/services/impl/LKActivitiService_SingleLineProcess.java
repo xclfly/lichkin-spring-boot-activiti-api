@@ -88,6 +88,7 @@ public class LKActivitiService_SingleLineProcess implements
 	public LKActivitiStartProcessOut_SingleLineProcess startProcess(LKActivitiStartProcessIn_SingleLineProcess in) {
 		Map<String, Object> variables = new HashMap<>();
 		// 设置通用流程变量
+		variables.put(KEY_PROCESS_CONFIG_ID, in.getProcessConfigId());
 		variables.put(KEY_PROCESS_KEY, in.getProcessKey());
 		variables.put(KEY_PROCESS_NAME, in.getProcessName());
 		variables.put(KEY_PROCESS_TYPE, in.getProcessType().toString());
@@ -183,17 +184,21 @@ public class LKActivitiService_SingleLineProcess implements
 		// 从His中获取processInstance
 		HistoricProcessInstance processInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(in.getProcessInstanceId()).singleResult();
 		if (processInstance != null) {
-			String variableNames = "'" + KEY_PROCESS_NAME + "','" + KEY_TASKINFOS_JSON + "'";
+			String variableNames = "'" + KEY_PROCESS_NAME + "','" + KEY_TASKINFOS_JSON + "','" + KEY_PROCESS_CONFIG_ID + "'";
 			List<HistoricVariableInstance> variableList = getHisVariableInfoByNames(in.getProcessInstanceId(), variableNames);
 
 			String processName = "";
 			String taskInfoJson = "";
+			String processConfigId = "";
 			for (HistoricVariableInstance variable : variableList) {
 				if (variable.getVariableName().equals(KEY_PROCESS_NAME)) {
 					processName = String.valueOf(variable.getValue());
 				}
 				if (variable.getVariableName().equals(KEY_TASKINFOS_JSON)) {
 					taskInfoJson = String.valueOf(variable.getValue());
+				}
+				if (variable.getVariableName().equals(KEY_PROCESS_CONFIG_ID)) {
+					processConfigId = String.valueOf(variable.getValue());
 				}
 			}
 
@@ -213,6 +218,7 @@ public class LKActivitiService_SingleLineProcess implements
 						taskAll.setTaskId(e.getId());
 						taskAll.setTaskName(taskInfo.getTaskName());
 						taskAll.setApproveUserName(taskInfo.getUserName());
+						taskAll.setProcessConfigId(processConfigId);
 						taskAll.setProcessName(processName);
 						taskAll.setProcessStartUserName(taskInfos.get(0).getUserName());
 						taskAll.setProcessStartTime(processInstance.getStartTime());
@@ -250,10 +256,10 @@ public class LKActivitiService_SingleLineProcess implements
 				if (taskAll.getTaskId().equals(taskInstance.getTaskDefinitionKey())) {
 					taskAll.setTaskName(taskInstance.getName());
 					taskAll.setTaskStartTime(taskInstance.getStartTime());
+					// 流程节点结束时间(未审批时此值为空)
+					taskAll.setTaskEndTime(taskInstance.getEndTime());
 					taskAll.setDeleteReason(taskInstance.getDeleteReason());
 
-					// 获取流程节点结束时间(未审批时此值为空)
-					taskAll.setTaskEndTime(taskInstance.getEndTime());
 					if (CollectionUtils.isNotEmpty(commentList)) {
 						for (Comment comment : commentList) {
 							if (comment.getTaskId().equals(taskInstance.getId())) {

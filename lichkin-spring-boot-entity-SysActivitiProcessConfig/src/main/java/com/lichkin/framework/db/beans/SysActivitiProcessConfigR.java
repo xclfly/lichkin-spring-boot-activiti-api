@@ -18,12 +18,14 @@ public interface SysActivitiProcessConfigR {
 
 	public static final int available = 0x30004005;
 
-	public static final int compId = 0x30004006;
+	public static final int stepCount = 0x30004006;
 
-	public static final int usingStatus = 0x30004007;
+	public static final int compId = 0x30004007;
 
-	public static final int insertTime = 0x30004008;
+	public static final int usingStatus = 0x30004008;
 
-	public static final int id = 0x30004009;
+	public static final int insertTime = 0x30004009;
+
+	public static final int id = 0x30004010;
 
 }

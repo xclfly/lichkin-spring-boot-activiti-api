@@ -6,6 +6,9 @@ package com.lichkin.framework.defines.activiti.statics;
  */
 public interface LKActivitiStatics {
 
+	/** 流程配置表主键 */
+	public static final String KEY_PROCESS_CONFIG_ID = "processConfigId";
+
 	/** 流程主键 */
 	public static final String KEY_PROCESS_KEY = "processKey";
 

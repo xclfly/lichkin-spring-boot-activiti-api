@@ -24,7 +24,7 @@ public class SysActivitiApiRequestLogCompleteProcessEntity extends BaseCompEntit
 	private static final long serialVersionUID = 30007L;
 
 	/** 用户ID */
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 200)
 	private String userId;
 
 	/** 流程类型 */

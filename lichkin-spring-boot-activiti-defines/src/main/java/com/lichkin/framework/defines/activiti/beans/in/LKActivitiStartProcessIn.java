@@ -17,7 +17,10 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class LKActivitiStartProcessIn {
 
-	/** 流程主键 */
+	/** 流程配置主键 */
+	protected final String processConfigId;
+
+	/** 流程主键(对应activiti中设置的key) */
 	protected final String processKey;
 
 	/** 流程名称 */

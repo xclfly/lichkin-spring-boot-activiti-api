@@ -7,14 +7,31 @@
 .lk-app-form-btns {
   width: 370px;
   height: 30px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .lk-app-form-btns .lk-app-btn {
   width: 100px;
-  float: left;
   text-align: center;
-  background-color: blue;
+  background-color: #89969E;
   color: white;
   margin: 2px;
   cursor: pointer;
+  font-size: 16px;
+  line-height: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+.lk-app-form-btns .lk-app-save-btn {
+  background-color: #5CB85C;
+}
+
+.lk-app-form-btns .lk-app-submit-btn {
+  background-color: #337AB7;
+}
+
+.lk-app-form-btns .lk-app-cancel-btn {
+  background-color: #89969E;
 }

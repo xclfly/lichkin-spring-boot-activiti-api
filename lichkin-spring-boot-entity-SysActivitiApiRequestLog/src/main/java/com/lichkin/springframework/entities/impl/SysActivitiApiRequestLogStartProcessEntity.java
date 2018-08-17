@@ -24,7 +24,7 @@ public class SysActivitiApiRequestLogStartProcessEntity extends BaseCompEntity {
 	private static final long serialVersionUID = 30006L;
 
 	/** 用户ID */
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 200)
 	private String userId;
 
 	/** 流程配置Id */

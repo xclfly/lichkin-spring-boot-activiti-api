@@ -16,7 +16,8 @@ class SysActivitiProcessTaskConfigRInitializer implements LKRInitializer {
 		LKDBResource.addColumn("30005002", "SysActivitiProcessTaskConfigEntity", "userId");
 		LKDBResource.addColumn("30005003", "SysActivitiProcessTaskConfigEntity", "userName");
 		LKDBResource.addColumn("30005004", "SysActivitiProcessTaskConfigEntity", "step");
-		LKDBResource.addColumn("30005005", "SysActivitiProcessTaskConfigEntity", "id");
+		LKDBResource.addColumn("30005005", "SysActivitiProcessTaskConfigEntity", "formJson");
+		LKDBResource.addColumn("30005006", "SysActivitiProcessTaskConfigEntity", "id");
 	}
 
 }

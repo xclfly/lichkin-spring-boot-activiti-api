@@ -20,6 +20,9 @@ public class LKActivitiGetDetailProcessOut_SingleLineProcess extends LKActivitiG
 	}
 
 
+	/** 流程配置ID */
+	private String processConfigId;
+
 	/** 流程名称 */
 	private String processName;
 

@@ -18,10 +18,6 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class GetDetailProcessIn extends LKRequestBean {
 
-	/** 用户ID */
-	@NotNull
-	private String userId;
-
 	/** 流程类型 */
 	@NotNull
 	private String processType;
