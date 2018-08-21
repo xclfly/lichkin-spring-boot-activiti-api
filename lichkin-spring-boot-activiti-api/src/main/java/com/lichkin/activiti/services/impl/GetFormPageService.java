@@ -1,7 +1,6 @@
 package com.lichkin.activiti.services.impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,11 +21,11 @@ import com.lichkin.springframework.services.LKApiService;
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 @Service
-public class GetFormListService extends LKApiService<GetFormListIn, List<GetFormListOut>> {
+public class GetFormPageService extends LKApiService<GetFormListIn, Page<GetFormListOut>> {
 
 	@Override
 	@Transactional
-	public List<GetFormListOut> handle(GetFormListIn in) throws LKException {
+	public Page<GetFormListOut> handle(GetFormListIn in) throws LKException {
 		QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
 		sql.select(0, SysDictionaryR.dictName, "formType");
 		sql.select(SysActivitiFormDataR.id);
@@ -41,7 +40,9 @@ public class GetFormListService extends LKApiService<GetFormListIn, List<GetForm
 		sql.neq(SysActivitiFormDataR.usingStatus, LKUsingStatusEnum.DEPRECATED);
 		sql.addOrders(new Order(SysActivitiFormDataR.insertTime, false));
 
-		return dao.getList(sql, GetFormListOut.class);
+		sql.setPage(in);
+
+		return dao.getPage(sql, GetFormListOut.class);
 	}
 
 }

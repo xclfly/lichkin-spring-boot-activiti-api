@@ -6,7 +6,9 @@ var currentPage = 'process';
 $(function() {
   $(window).scroll(function() {
     if (isPageBottom()) {
-      if (currentPage == 'pending') {
+      if (currentPage == 'myApplication') {
+        loadMyApplicationList();
+      } else if (currentPage == 'pending') {
         loadPendingList();
       } else if (currentPage == 'done') {
         loadDoneList();
@@ -32,6 +34,9 @@ $(function() {
   });
 
   $myApplicationBtn.click(function() {
+    pageNumber = 0;
+    isLastPage = false;
+    currentPage = 'myApplication';
     $lkAppUL.html('');
     loadMyApplicationList();
   });
@@ -79,12 +84,23 @@ function loadProcessList() {
 
 // 我的申请
 function loadMyApplicationList() {
+  if (isLastPage) {
+    return;
+  }
   LK.ajax({
-    url : '/UserEmployee/Activiti/GetFormList',
+    url : '/UserEmployee/Activiti/GetFormPage',
+    data : {
+      pageNumber : pageNumber,
+      pageSize : 10
+    },
     success : function(responseDatas) {
       if (responseDatas) {
-        for (var i = 0; i < responseDatas.length; i++) {
-          var ary = responseDatas[i];
+        if (responseDatas.last) {
+          isLastPage = true;
+        }
+        var content = responseDatas.content;
+        for (var i = 0; i < content.length; i++) {
+          var ary = content[i];
           var $li = $('<li></li>').appendTo($lkAppUL);
 
           $('<div class="lk-processName">' + ary.formType + '</div>').appendTo($li);
@@ -98,6 +114,7 @@ function loadMyApplicationList() {
           })(ary.id);
         }
       }
+      pageNumber++;
     }
   });
 }
@@ -180,7 +197,7 @@ function loadDoneList() {
           } else {
             $('<div class="lk-processStatus"><lable>' + $.LKGetI18N('Approval status') + '：</lable>' + ary.activeTaskName + '</div>').appendTo($li);
           }
-          
+
           var $btns = $('<div class="lk-app-form-btns"></div>').appendTo($li);
           var $viewBtn = $('<div class="lk-app-btn">' + $.LKGetI18N('View') + '</div>').appendTo($btns);
           var $traceBtn = $('<div class="lk-app-btn">' + $.LKGetI18N('Trace') + '</div>').appendTo($btns);
@@ -189,7 +206,7 @@ function loadDoneList() {
             $viewBtn.click(function() {
               window.location.href = _CTX + '/complete/index' + _MAPPING_PAGES + '?processType=SINGLE_LINE&processInstanceId=' + processInstanceId + '&processState=done';
             });
-            
+
             $traceBtn.click(function() {
               window.location.href = _CTX + '/processDetail/index' + _MAPPING_PAGES + '?processType=SINGLE_LINE&processInstanceId=' + processInstanceId + '&processState=done';
             });

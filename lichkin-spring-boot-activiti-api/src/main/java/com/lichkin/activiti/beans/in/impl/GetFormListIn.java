@@ -1,6 +1,6 @@
 package com.lichkin.activiti.beans.in.impl;
 
-import com.lichkin.framework.beans.impl.LKRequestBean;
+import com.lichkin.framework.beans.impl.LKRequestPageBean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class GetFormListIn extends LKRequestBean {
+public class GetFormListIn extends LKRequestPageBean {
 
 }
