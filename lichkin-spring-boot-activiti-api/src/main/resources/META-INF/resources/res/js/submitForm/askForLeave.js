@@ -21,27 +21,25 @@ $(function() {
 
           var $btns = $('<div class="lk-app-form-btns"></div>').appendTo($lkAppContent);
           var $saveBtn = $('<div class="lk-app-btn lk-app-save-btn" id="save_btn">' + $.LKGetI18N('save') + '</div>').appendTo($btns);
-          var $cancelBtn = $('<div class="lk-app-btn" id="cancel_btn">' + $.LKGetI18N('cancel') + '</div>').appendTo($btns);
 
           $saveBtn.click(function() {
-            LK.ajax({
-              url : '/UserEmployee/Activiti/SubmitForm',
-              data : {
-                formDataJson : 'step1' + LK.SPLITOR + formPluginsJson + LK.SPLITOR + JSON.stringify($form.LKFormGetData()),
-                formTypeCode : _processCode,
-                processConfigId : _processId
-              },
-              success : function(responseDatas) {
-                if (responseDatas) {
-                  LK.alert('Save successfully');
-                  window.location.href = _CTX + '/submitForm/' + _processCode + _MAPPING_PAGES + '?formId=' + responseDatas.id;
+            if($form.LKValidate()){
+              LK.ajax({
+                url : '/UserEmployee/Activiti/SubmitForm',
+                data : {
+                  formDataJson : 'step1' + LK.SPLITOR + formPluginsJson + LK.SPLITOR + JSON.stringify($form.LKFormGetData()),
+                  formTypeCode : _processCode,
+                  processConfigId : _processId
+                },
+                success : function(responseDatas) {
+                  if (responseDatas) {
+                    LK.alert('Save successfully');
+                    window.location.href = _CTX + '/submitForm/' + _processCode + _MAPPING_PAGES + '?formId=' + responseDatas.id;
+                  }
                 }
-              }
-            });
-          });
-
-          $cancelBtn.click(function() {
-            window.history.back();
+              });
+            }
+      
           });
 
         }
@@ -54,7 +52,7 @@ $(function() {
     LK.ajax({
       url : '/UserEmployee/Activiti/GetOneForm',
       data : {
-        id : _formId,
+        id : _formId
       },
       success : function(responseDatas) {
         if (responseDatas) {
@@ -89,8 +87,7 @@ $(function() {
                   userId : _userId,
                   userName : _userName,
                   processConfigId : responseDatas.processConfigId,
-                  businessKey : _formId,
-                // comment : $form.LKFormGetData().comment
+                  businessKey : _formId
                 },
                 success : function(responseDatas) {
                   if (responseDatas) {
@@ -100,13 +97,22 @@ $(function() {
                 }
               });
             });
+
+            var $cancelBtn = $('<div class="lk-app-btn" id="cancel_btn">' + $.LKGetI18N('Cancel application') + '</div>').appendTo($btns);
+            $cancelBtn.click(function() {
+              LK.ajax({
+                url : '/UserEmployee/Activiti/UpdateForm',
+                data : {
+                  id : _formId,
+                  usingStatus : 'DEPRECATED'
+                },
+                success : function(responseDatas) {
+                  LK.alert('Cancel successfully');
+                  window.history.back();
+                }
+              });
+            });
           }
-
-          var $cancelBtn = $('<div class="lk-app-btn" id="cancel_btn">' + $.LKGetI18N('cancel') + '</div>').appendTo($btns);
-
-          $cancelBtn.click(function() {
-            window.history.back();
-          });
 
         }
       }
