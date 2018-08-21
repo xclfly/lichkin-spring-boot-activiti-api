@@ -10,9 +10,13 @@ import com.lichkin.activiti.beans.out.impl.RejectProcessOut;
 import com.lichkin.framework.activiti.beans.in.impl.LKActivitiRejectProcessIn_SingleLineProcess;
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiRejectProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
+import com.lichkin.framework.db.beans.QuerySQL;
+import com.lichkin.framework.db.beans.SysActivitiFormDataR;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+import com.lichkin.framework.defines.activiti.enums.impl.LKApprovalStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
 import com.lichkin.framework.utils.LKEnumUtils;
+import com.lichkin.springframework.entities.impl.SysActivitiFormDataEntity;
 import com.lichkin.springframework.services.LKApiService;
 
 /**
@@ -56,6 +60,13 @@ public class RejectProcessService extends LKApiService<RejectProcessIn, RejectPr
 		LKActivitiRejectProcessIn_SingleLineProcess i = new LKActivitiRejectProcessIn_SingleLineProcess(in.getProcessInstanceId(), in.getUserId(), in.getComment());
 		// 调用服务类方法
 		LKActivitiRejectProcessOut_SingleLineProcess o = slp.RejectProcess(i);
+
+		// 修改表单状态
+		QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
+		sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
+		SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
+		formDataEntity.setApprovalStatus(LKApprovalStatusEnum.REJECT);
+		dao.mergeOne(formDataEntity);
 
 		// 初始化出参
 		RejectProcessOut out = new RejectProcessOut();

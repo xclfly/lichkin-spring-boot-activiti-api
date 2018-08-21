@@ -9,19 +9,26 @@ import com.lichkin.springframework.controllers.LKPagesController;
 import com.lichkin.springframework.web.LKSession;
 import com.lichkin.springframework.web.beans.LKPage;
 
+/**
+ * 办理流程控制器类
+ * @author SuZhou LichKin Information Technology Co., Ltd.
+ */
 @Controller
-
-@RequestMapping("/startProcess")
-public class StartProcessPageController extends LKPagesController {
+@RequestMapping("/complete")
+public class CompletePageController extends LKPagesController {
 
 	@WithoutLogin
 	@GetMapping(value = "/index" + MAPPING)
 	public LKPage linkTo() {
-		String processId = request.getParameter("processId");
+		String processType = request.getParameter("processType");
+		String processInstanceId = request.getParameter("processInstanceId");
+		String processState = request.getParameter("processState");
+
 		LKPage lkPage = new LKPage();
-		lkPage.putAttribute("processId", processId);
 		lkPage.putAttribute("userId", LKSession.getString(session, "activitiUserId", ""));
-		lkPage.putAttribute("userName", LKSession.getUser(session).getUserName());
+		lkPage.putAttribute("processType", processType);
+		lkPage.putAttribute("processInstanceId", processInstanceId);
+		lkPage.putAttribute("processState", processState);
 		return lkPage;
 	}
 

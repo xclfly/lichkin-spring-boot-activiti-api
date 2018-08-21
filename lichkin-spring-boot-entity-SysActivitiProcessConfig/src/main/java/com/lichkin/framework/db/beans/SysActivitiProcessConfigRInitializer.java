@@ -11,17 +11,17 @@ class SysActivitiProcessConfigRInitializer implements LKRInitializer {
 	 */
 	public static void init() {
 		LKDBResource.addTable("com.lichkin.springframework.entities.impl.SysActivitiProcessConfigEntity", "T_SYS_ACTIVITI_PROCESS_CONFIG", "SysActivitiProcessConfigEntity");
-		LKDBResource.addColumn("30004000", "SysActivitiProcessConfigEntity", "processCode");
-		LKDBResource.addColumn("30004001", "SysActivitiProcessConfigEntity", "processKey");
-		LKDBResource.addColumn("30004002", "SysActivitiProcessConfigEntity", "processType");
-		LKDBResource.addColumn("30004003", "SysActivitiProcessConfigEntity", "processName");
-		LKDBResource.addColumn("30004004", "SysActivitiProcessConfigEntity", "deptId");
-		LKDBResource.addColumn("30004005", "SysActivitiProcessConfigEntity", "available");
-		LKDBResource.addColumn("30004006", "SysActivitiProcessConfigEntity", "stepCount");
-		LKDBResource.addColumn("30004007", "SysActivitiProcessConfigEntity", "compId");
-		LKDBResource.addColumn("30004008", "SysActivitiProcessConfigEntity", "usingStatus");
-		LKDBResource.addColumn("30004009", "SysActivitiProcessConfigEntity", "insertTime");
-		LKDBResource.addColumn("30004010", "SysActivitiProcessConfigEntity", "id");
+		LKDBResource.addColumn("30005000", "SysActivitiProcessConfigEntity", "processCode");
+		LKDBResource.addColumn("30005001", "SysActivitiProcessConfigEntity", "processKey");
+		LKDBResource.addColumn("30005002", "SysActivitiProcessConfigEntity", "processType");
+		LKDBResource.addColumn("30005003", "SysActivitiProcessConfigEntity", "processName");
+		LKDBResource.addColumn("30005004", "SysActivitiProcessConfigEntity", "deptId");
+		LKDBResource.addColumn("30005005", "SysActivitiProcessConfigEntity", "available");
+		LKDBResource.addColumn("30005006", "SysActivitiProcessConfigEntity", "stepCount");
+		LKDBResource.addColumn("30005007", "SysActivitiProcessConfigEntity", "compId");
+		LKDBResource.addColumn("30005008", "SysActivitiProcessConfigEntity", "usingStatus");
+		LKDBResource.addColumn("30005009", "SysActivitiProcessConfigEntity", "insertTime");
+		LKDBResource.addColumn("30005010", "SysActivitiProcessConfigEntity", "id");
 	}
 
 }

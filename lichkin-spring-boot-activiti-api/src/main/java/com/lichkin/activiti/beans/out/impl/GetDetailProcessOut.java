@@ -38,6 +38,9 @@ public class GetDetailProcessOut {
 	/** 流程ID */
 	private String processInstanceId;
 
+	/** 业务key */
+	private String businessKey;
+
 	/** 流程名称 */
 	private String processName;
 

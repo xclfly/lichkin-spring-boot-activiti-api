@@ -50,6 +50,7 @@ public class GetProcessListService extends LKApiService<GetProcessListIn, List<G
 				GetProcessListOut out = new GetProcessListOut();
 				out.setProcessId(processConfig.getId());
 				out.setProcessName(processConfig.getProcessName());
+				out.setProcessCode(processConfig.getProcessCode());
 				processList.add(out);
 			}
 		}
@@ -67,6 +68,7 @@ public class GetProcessListService extends LKApiService<GetProcessListIn, List<G
 				GetProcessListOut out = new GetProcessListOut();
 				out.setProcessId(compProList.get(i).getId());
 				out.setProcessName(compProList.get(i).getProcessName());
+				out.setProcessCode(compProList.get(i).getProcessCode());
 				processList.add(out);
 			}
 		}

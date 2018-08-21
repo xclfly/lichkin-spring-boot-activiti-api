@@ -9,6 +9,10 @@ import com.lichkin.springframework.controllers.LKPagesController;
 import com.lichkin.springframework.web.LKSession;
 import com.lichkin.springframework.web.beans.LKPage;
 
+/**
+ * 流程详情控制器类
+ * @author SuZhou LichKin Information Technology Co., Ltd.
+ */
 @Controller
 @RequestMapping("/processDetail")
 public class ProcessDetailPageController extends LKPagesController {

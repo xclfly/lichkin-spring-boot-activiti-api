@@ -23,6 +23,9 @@ public class LKActivitiStartProcessIn {
 	/** 流程主键(对应activiti中设置的key) */
 	protected final String processKey;
 
+	/** 业务key */
+	private final String businessKey;
+
 	/** 流程名称 */
 	protected final String processName;
 

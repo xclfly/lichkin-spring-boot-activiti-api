@@ -19,7 +19,7 @@ import com.lichkin.springframework.services.LKApiService;
  * 获取已办流程节点控制器类
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
-@LKApiType(apiType = ApiType.ROOT_QUERY)
+@LKApiType(apiType = ApiType.PERSONAL_BUSINESS)
 @RestController
 @RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_WEB_USEREMPLOYEE + "/Activiti/GetDoneProcess")
 public class GetDoneProcessController extends LKApiController<GetDoneProcessIn, List<GetDoneProcessOut>> {

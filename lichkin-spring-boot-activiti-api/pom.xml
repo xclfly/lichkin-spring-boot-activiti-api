@@ -28,6 +28,11 @@
       <groupId>com.lichkin.springframework.boot.entity</groupId>
       <artifactId>lichkin-spring-boot-entity-SysActivitiProcessConfig</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.lichkin.springframework.boot.entity</groupId>
+      <artifactId>lichkin-spring-boot-entity-SysDictionary</artifactId>
+      <version>1.0.0.RELEASE</version>
+    </dependency>
     <!-- lichkin projects -->
     <dependency>
       <groupId>com.lichkin.projects</groupId>
@@ -49,6 +54,14 @@
       <groupId>com.lichkin.springframework.boot.activiti</groupId>
       <artifactId>lichkin-spring-boot-activiti-impl-slp</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>
       <groupId>mysql</groupId>

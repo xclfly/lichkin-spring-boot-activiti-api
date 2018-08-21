@@ -19,7 +19,7 @@ import com.lichkin.springframework.services.LKApiService;
  * 获取流程列表
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
-@LKApiType(apiType = ApiType.ROOT_QUERY)
+@LKApiType(apiType = ApiType.PERSONAL_BUSINESS)
 @RestController
 @RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_WEB_USEREMPLOYEE + "/Activiti/GetProcessList")
 public class GetProcessListController extends LKApiController<GetProcessListIn, List<GetProcessListOut>> {

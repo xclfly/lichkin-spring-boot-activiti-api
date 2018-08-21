@@ -18,8 +18,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class LKActivitiStartProcessIn_SingleLineProcess extends LKActivitiStartProcessIn {
 
-	public LKActivitiStartProcessIn_SingleLineProcess(String processConfigId, String processKey, String processName, LKActivitiProcessTypeEnum processType, String comment) {
-		super(processConfigId, processKey, processName, processType, comment);
+	public LKActivitiStartProcessIn_SingleLineProcess(String processConfigId, String processKey, String businessKey, String processName, LKActivitiProcessTypeEnum processType, String comment) {
+		super(processConfigId, processKey, businessKey, processName, processType, comment);
 	}
 
 

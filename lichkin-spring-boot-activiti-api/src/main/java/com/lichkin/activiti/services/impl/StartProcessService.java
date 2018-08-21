@@ -18,9 +18,12 @@ import com.lichkin.framework.db.beans.Order;
 import com.lichkin.framework.db.beans.QuerySQL;
 import com.lichkin.framework.db.beans.SysActivitiProcessTaskConfigR;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+import com.lichkin.framework.defines.activiti.enums.impl.LKApprovalStatusEnum;
+import com.lichkin.framework.defines.enums.impl.LKUsingStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
 import com.lichkin.framework.utils.LKBeanUtils;
 import com.lichkin.springframework.entities.impl.SysActivitiApiRequestLogStartProcessEntity;
+import com.lichkin.springframework.entities.impl.SysActivitiFormDataEntity;
 import com.lichkin.springframework.entities.impl.SysActivitiProcessConfigEntity;
 import com.lichkin.springframework.entities.impl.SysActivitiProcessTaskConfigEntity;
 import com.lichkin.springframework.services.LKApiService;
@@ -71,7 +74,7 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 	 */
 	private StartProcessOut startSingleLineProcess(StartProcessIn in, SysActivitiProcessConfigEntity config) throws LKException {
 		// 初始化入参
-		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getId(), config.getProcessKey(), config.getProcessName(), config.getProcessType(), in.getComment());
+		LKActivitiStartProcessIn_SingleLineProcess i = new LKActivitiStartProcessIn_SingleLineProcess(config.getId(), config.getProcessKey(), in.getBusinessKey(), config.getProcessName(), config.getProcessType(), in.getComment());
 
 		// 查询流程对应的节点信息
 		QuerySQL sql = new QuerySQL(false, SysActivitiProcessTaskConfigEntity.class);
@@ -95,6 +98,13 @@ public class StartProcessService extends LKApiService<StartProcessIn, StartProce
 
 		// 调用服务类方法
 		LKActivitiStartProcessOut_SingleLineProcess o = slp.startProcess(i);
+
+		// 修改表单的状态
+		SysActivitiFormDataEntity formDataEntity = dao.findOneById(SysActivitiFormDataEntity.class, in.getBusinessKey());
+		formDataEntity.setProcessInstanceId(o.getProcessInstanceId());
+		formDataEntity.setApprovalStatus(LKApprovalStatusEnum.HANDLING);
+		formDataEntity.setUsingStatus(LKUsingStatusEnum.USING);
+		dao.mergeOne(formDataEntity);
 
 		// 初始化出参
 		StartProcessOut out = new StartProcessOut(o.getProcessInstanceId(), config.getProcessType());

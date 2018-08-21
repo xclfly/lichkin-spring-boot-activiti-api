@@ -17,7 +17,7 @@ import com.lichkin.springframework.services.LKApiService;
  * 办理流程节点控制器类
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
-@LKApiType(apiType = ApiType.ROOT_QUERY)
+@LKApiType(apiType = ApiType.PERSONAL_BUSINESS)
 @RestController
 @RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_WEB_USEREMPLOYEE + "/Activiti/CompleteProcess")
 public class CompleteProcessController extends LKApiController<CompleteProcessIn, CompleteProcessOut> {

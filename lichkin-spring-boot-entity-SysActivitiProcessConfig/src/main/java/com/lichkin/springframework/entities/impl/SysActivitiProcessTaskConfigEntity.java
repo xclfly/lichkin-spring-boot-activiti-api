@@ -19,7 +19,7 @@ import lombok.Setter;
 public class SysActivitiProcessTaskConfigEntity extends IDEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 30005L;
+	private static final long serialVersionUID = 30006L;
 
 	/** 流程ID */
 	@Column(nullable = false, length = 64)

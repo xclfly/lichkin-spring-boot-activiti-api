@@ -103,7 +103,7 @@ public class LKActivitiService_SingleLineProcess implements
 		variables.put(KEY_START_USER_NAME, taskInfos.get(0).getUserName());
 
 		// 启动流程
-		ProcessInstance instance = runtimeService.startProcessInstanceByKey(in.getProcessKey(), variables);
+		ProcessInstance instance = runtimeService.startProcessInstanceByKey(in.getProcessKey(), in.getBusinessKey(), variables);
 
 		// 完成第一步处理
 		completeProcess(new LKActivitiComplateProcessIn_SingleLineProcess(instance.getProcessInstanceId(), taskInfos.get(0).getUserId(), in.getComment()));
@@ -219,6 +219,7 @@ public class LKActivitiService_SingleLineProcess implements
 						taskAll.setTaskName(taskInfo.getTaskName());
 						taskAll.setApproveUserName(taskInfo.getUserName());
 						taskAll.setProcessConfigId(processConfigId);
+						taskAll.setBusinessKey(processInstance.getBusinessKey());
 						taskAll.setProcessName(processName);
 						taskAll.setProcessStartUserName(taskInfos.get(0).getUserName());
 						taskAll.setProcessStartTime(processInstance.getStartTime());

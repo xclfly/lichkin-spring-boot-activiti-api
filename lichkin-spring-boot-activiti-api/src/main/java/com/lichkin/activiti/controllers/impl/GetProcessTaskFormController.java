@@ -17,7 +17,7 @@ import com.lichkin.springframework.services.LKApiService;
  * 获取流程节点表单
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
-@LKApiType(apiType = ApiType.ROOT_QUERY)
+@LKApiType(apiType = ApiType.PERSONAL_BUSINESS)
 @RestController
 @RequestMapping(value = LKFrameworkStatics.WEB_MAPPING_API_WEB_USEREMPLOYEE + "/Activiti/GetProcessTaskForm")
 public class GetProcessTaskFormController extends LKApiController<GetProcessTaskFormIn, GetProcessTaskFormOut> {

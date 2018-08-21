@@ -21,7 +21,7 @@ import lombok.Setter;
 public class SysActivitiApiRequestLogCompleteProcessEntity extends BaseCompEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 30007L;
+	private static final long serialVersionUID = 30008L;
 
 	/** 用户ID */
 	@Column(nullable = false, length = 200)

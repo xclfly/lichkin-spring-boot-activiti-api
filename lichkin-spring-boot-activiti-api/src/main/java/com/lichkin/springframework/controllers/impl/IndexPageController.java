@@ -8,7 +8,7 @@ import com.lichkin.springframework.controllers.LKPagesController;
 import com.lichkin.springframework.web.beans.LKPage;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/111")
 public class IndexPageController extends LKPagesController {
 
 	@GetMapping(value = "/index" + MAPPING)

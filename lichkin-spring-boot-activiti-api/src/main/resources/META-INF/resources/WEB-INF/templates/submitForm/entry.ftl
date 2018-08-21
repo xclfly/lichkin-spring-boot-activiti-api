@@ -1,4 +1,4 @@
-<#include "/macro/html-lichkin-simple.ftl"/>
+<#include "/macro/html-lichkin-h5.ftl"/>
 
 <@html "",true;section>
   <#if section="javascript-contents-before-links">

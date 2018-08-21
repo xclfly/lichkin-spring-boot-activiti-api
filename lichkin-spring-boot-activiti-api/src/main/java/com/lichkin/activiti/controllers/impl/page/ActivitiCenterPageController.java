@@ -12,6 +12,10 @@ import com.lichkin.springframework.controllers.LKPagesController;
 import com.lichkin.springframework.web.LKSession;
 import com.lichkin.springframework.web.beans.LKPage;
 
+/**
+ * 工作流中心控制器类
+ * @author SuZhou LichKin Information Technology Co., Ltd.
+ */
 @Controller
 @RequestMapping("/activitiCenter")
 public class ActivitiCenterPageController extends LKPagesController {
@@ -35,6 +39,7 @@ public class ActivitiCenterPageController extends LKPagesController {
 				LKSession.setString(session, "deptId", loginInfo.getDept().getId());
 				LKSession.setString(session, "activitiUserId", loginInfo.getEmployeeLogin().getId() + "_" + compId);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 

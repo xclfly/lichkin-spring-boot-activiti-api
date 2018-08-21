@@ -6,7 +6,7 @@
 }
 
 .lk-tab-btn {
-  width: 100px;
+  width: 88px;
   float: left;
   text-align: center;
   background-color: blue;
@@ -24,4 +24,24 @@
 .lk-tab-content li {
   background-color: #E7E8E8;
   margin-top: 2px;
+}
+
+.lk-app-form-btns {
+  width: 370px;
+  height: 30px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lk-app-form-btns .lk-app-btn {
+  width: 100px;
+  text-align: center;
+  background-color: #52a0d0;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 30px;
+  height: 30px;
+  display: inline-block;
 }

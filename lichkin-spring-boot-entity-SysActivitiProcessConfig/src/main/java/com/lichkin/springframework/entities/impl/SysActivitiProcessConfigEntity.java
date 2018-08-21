@@ -22,7 +22,7 @@ import lombok.Setter;
 public class SysActivitiProcessConfigEntity extends BaseCompEntity {
 
 	/** serialVersionUID */
-	private static final long serialVersionUID = 30004L;
+	private static final long serialVersionUID = 30005L;
 
 	/** 流程编码 */
 	@Column(nullable = false, length = 128)

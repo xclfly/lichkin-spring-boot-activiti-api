@@ -20,6 +20,9 @@ public class LKActivitiGetDetailProcessOut_SingleLineProcess extends LKActivitiG
 	}
 
 
+	/** 业务key */
+	private String businessKey;
+
 	/** 流程配置ID */
 	private String processConfigId;
 

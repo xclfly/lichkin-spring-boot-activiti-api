@@ -29,6 +29,10 @@ public class StartProcessIn extends LKRequestBean {
 	@NotNull
 	private String processConfigId;
 
+	/** 业务key */
+	@NotNull
+	private String businessKey;
+
 	/** 备注 */
 	private String comment;
 

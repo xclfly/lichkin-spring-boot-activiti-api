@@ -10,11 +10,16 @@ import com.lichkin.activiti.beans.out.impl.CompleteProcessOut;
 import com.lichkin.framework.activiti.beans.in.impl.LKActivitiComplateProcessIn_SingleLineProcess;
 import com.lichkin.framework.activiti.beans.out.impl.LKActivitiCompleteProcessOut_SingleLineProcess;
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
+import com.lichkin.framework.db.beans.QuerySQL;
+import com.lichkin.framework.db.beans.SysActivitiFormDataR;
+import com.lichkin.framework.defines.LKFrameworkStatics;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
+import com.lichkin.framework.defines.activiti.enums.impl.LKApprovalStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
 import com.lichkin.framework.utils.LKBeanUtils;
 import com.lichkin.framework.utils.LKEnumUtils;
 import com.lichkin.springframework.entities.impl.SysActivitiApiRequestLogCompleteProcessEntity;
+import com.lichkin.springframework.entities.impl.SysActivitiFormDataEntity;
 import com.lichkin.springframework.services.LKApiService;
 
 /**
@@ -30,6 +35,13 @@ public class CompleteProcessService extends LKApiService<CompleteProcessIn, Comp
 		// 记录请求日志
 		SysActivitiApiRequestLogCompleteProcessEntity log = LKBeanUtils.newInstance(false, in, SysActivitiApiRequestLogCompleteProcessEntity.class);
 		dao.mergeOne(log);
+
+		// 记录审批表单
+		QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
+		sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
+		SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
+		formDataEntity.setFormDataJson(formDataEntity.getFormDataJson() + LKFrameworkStatics.SPLITOR_FIELDS + in.getFormDataJson());
+		dao.mergeOne(formDataEntity);
 
 		if (in.getProcessType() != null) {
 			// 根据流程类型执行
@@ -66,7 +78,14 @@ public class CompleteProcessService extends LKApiService<CompleteProcessIn, Comp
 		// 初始化出参
 		CompleteProcessOut out = new CompleteProcessOut(o.isProcessIsEnd());
 
-		// TODO 设置其它参数
+		// 流程结束 修改表单状态
+		if (o.isProcessIsEnd()) {
+			QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
+			sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
+			SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
+			formDataEntity.setApprovalStatus(LKApprovalStatusEnum.APPROVED);
+			dao.mergeOne(formDataEntity);
+		}
 
 		// 返回结果
 		return out;

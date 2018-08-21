@@ -1,7 +1,6 @@
 package com.lichkin.activiti.beans.out.impl;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,11 +11,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 public class GetProcessListOut {
 
 	private String processId;
 
 	private String processName;
+
+	private String processCode;
 
 }
