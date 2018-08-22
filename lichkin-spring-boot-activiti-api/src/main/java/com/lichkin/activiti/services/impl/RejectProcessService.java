@@ -1,5 +1,6 @@
 package com.lichkin.activiti.services.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import com.lichkin.framework.activiti.beans.out.impl.LKActivitiRejectProcessOut_
 import com.lichkin.framework.activiti.services.impl.LKActivitiService_SingleLineProcess;
 import com.lichkin.framework.db.beans.QuerySQL;
 import com.lichkin.framework.db.beans.SysActivitiFormDataR;
+import com.lichkin.framework.defines.LKFrameworkStatics;
 import com.lichkin.framework.defines.activiti.enums.impl.LKActivitiProcessTypeEnum;
 import com.lichkin.framework.defines.activiti.enums.impl.LKApprovalStatusEnum;
 import com.lichkin.framework.defines.exceptions.LKException;
@@ -66,6 +68,9 @@ public class RejectProcessService extends LKApiService<RejectProcessIn, RejectPr
 		sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
 		SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
 		formDataEntity.setApprovalStatus(LKApprovalStatusEnum.REJECT);
+		if (StringUtils.isNotBlank(in.getFormDataJson())) {
+			formDataEntity.setFormDataJson(formDataEntity.getFormDataJson() + LKFrameworkStatics.SPLITOR_FIELDS + in.getFormDataJson());
+		}
 		dao.mergeOne(formDataEntity);
 
 		// 初始化出参

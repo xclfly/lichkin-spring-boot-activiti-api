@@ -71,11 +71,11 @@ function loadProcessList() {
         for (var i = 0; i < responseDatas.length; i++) {
           var ary = responseDatas[i];
           var $li = $('<li>' + ary.processName + '</li>').appendTo($lkAppUL);
-          (function(processId) {
+          (function(processId, processCode) {
             $li.click(function() {
-              window.location.href = _CTX + '/submitForm/' + ary.processCode + _MAPPING_PAGES + '?processId=' + processId;
+              window.location.href = _CTX + '/submitForm/' + processCode + _MAPPING_PAGES + '?processId=' + processId;
             });
-          })(ary.processId);
+          })(ary.processId, ary.processCode);
         }
       }
     }
@@ -107,11 +107,11 @@ function loadMyApplicationList() {
           $('<div class="lk-processStartUserName"><lable>' + $.LKGetI18N('Approval status') + '：</lable>' + $.LKGetI18N('APPROVAL_STATUS.' + ary.approvalStatus) + '</div>').appendTo($li);
           $('<div class="lk-taskStartTime"><lable>' + $.LKGetI18N('Create time') + '：</lable>' + formatterTime(ary.insertTime) + '</div>').appendTo($li);
 
-          (function(formId) {
+          (function(formId, formTypeCode) {
             $li.click(function() {
-              window.location.href = _CTX + '/submitForm/' + ary.formTypeCode + _MAPPING_PAGES + '?formId=' + formId;
+              window.location.href = _CTX + '/submitForm/' + formTypeCode + _MAPPING_PAGES + '?formId=' + formId;
             });
-          })(ary.id);
+          })(ary.id, ary.formTypeCode);
         }
       }
       pageNumber++;

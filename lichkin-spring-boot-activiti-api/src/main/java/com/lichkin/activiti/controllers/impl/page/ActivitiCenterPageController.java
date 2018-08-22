@@ -37,6 +37,7 @@ public class ActivitiCenterPageController extends LKPagesController {
 				LKSession.setComp(session, loginInfo.getComp());
 				LKSession.setUser(session, loginInfo.getEmployee());
 				LKSession.setString(session, "deptId", loginInfo.getDept().getId());
+				LKSession.setString(session, "deptName", loginInfo.getDept().getDeptName());
 				LKSession.setString(session, "activitiUserId", loginInfo.getEmployeeLogin().getId() + "_" + compId);
 			} catch (Exception e) {
 				e.printStackTrace();

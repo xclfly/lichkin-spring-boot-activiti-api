@@ -31,6 +31,9 @@ public class RejectProcessIn extends LKRequestBean {
 	@NotNull
 	private String processInstanceId;
 
+	/** 审批表单 */
+	private String formDataJson;
+
 	/** 审批备注信息 */
 	private String comment;
 

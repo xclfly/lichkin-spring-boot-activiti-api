@@ -4,6 +4,6 @@
  * @author SuZhou LichKin Information Technology Co., Ltd.
  */
 
-$.LKExtendI18N( {
-
+$.LKExtendI18N({
+  
 });

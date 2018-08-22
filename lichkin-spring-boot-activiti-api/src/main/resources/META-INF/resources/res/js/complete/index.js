@@ -79,7 +79,6 @@ $(function() {
                         $appendTo : $lkAppContent
                       });
                       var $form = LK.UI.form(formOptions);
-                      console.log($form.LKFormGetData());
 
                       var $btns = $('<div class="lk-app-form-btns"></div>').appendTo($lkAppContent);
                       var $submitBtn = $('<div class="lk-app-btn lk-app-agree-btn">' + $.LKGetI18N('Agree') + '</div>').appendTo($btns);

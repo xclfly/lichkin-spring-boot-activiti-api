@@ -1,5 +1,6 @@
 package com.lichkin.activiti.services.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +38,13 @@ public class CompleteProcessService extends LKApiService<CompleteProcessIn, Comp
 		dao.mergeOne(log);
 
 		// 记录审批表单
-		QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
-		sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
-		SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
-		formDataEntity.setFormDataJson(formDataEntity.getFormDataJson() + LKFrameworkStatics.SPLITOR_FIELDS + in.getFormDataJson());
-		dao.mergeOne(formDataEntity);
+		if (StringUtils.isNotBlank(in.getFormDataJson())) {
+			QuerySQL sql = new QuerySQL(SysActivitiFormDataEntity.class);
+			sql.eq(SysActivitiFormDataR.processInstanceId, in.getProcessInstanceId());
+			SysActivitiFormDataEntity formDataEntity = dao.getOne(sql, SysActivitiFormDataEntity.class);
+			formDataEntity.setFormDataJson(formDataEntity.getFormDataJson() + LKFrameworkStatics.SPLITOR_FIELDS + in.getFormDataJson());
+			dao.mergeOne(formDataEntity);
+		}
 
 		if (in.getProcessType() != null) {
 			// 根据流程类型执行
