@@ -9,7 +9,7 @@
   width: 88px;
   float: left;
   text-align: center;
-  background-color: blue;
+  background-color: #3395DE;
   color: white;
   margin: 2px;
   cursor: pointer;
@@ -22,8 +22,16 @@
 }
 
 .lk-tab-content li {
-  background-color: #E7E8E8;
+  background-color: #B5E0FF;
   margin-top: 2px;
+  color: var(--lichkin-plugin-border-color-inverse);
+}
+
+.lk-tab-content .lk-proces-banner {
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 24px;
 }
 
 .lk-app-form-btns {

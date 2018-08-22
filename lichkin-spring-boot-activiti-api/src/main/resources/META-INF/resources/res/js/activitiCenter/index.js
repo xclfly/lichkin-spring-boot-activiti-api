@@ -70,7 +70,7 @@ function loadProcessList() {
       if (responseDatas) {
         for (var i = 0; i < responseDatas.length; i++) {
           var ary = responseDatas[i];
-          var $li = $('<li>' + ary.processName + '</li>').appendTo($lkAppUL);
+          var $li = $('<li class="lk-proces-banner">' + ary.processName + '</li>').appendTo($lkAppUL);
           (function(processId, processCode) {
             $li.click(function() {
               window.location.href = _CTX + '/submitForm/' + processCode + _MAPPING_PAGES + '?processId=' + processId;
